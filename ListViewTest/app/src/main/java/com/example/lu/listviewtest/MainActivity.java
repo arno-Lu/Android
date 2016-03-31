@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-`   
+`
     private  void initCharacter(){
 
-        Character A = new Character("A",R.drawable.a123);
+        Character A = new Character("A",R.drawable.a123);    //图片必须以字母为开头
         characterList.add(A);
 
         Character B = new Character("B",R.drawable.a123);
