@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/news_title_frag"
+        android:name="com.example.mechrevo.fragmentbestpractice.NewsTitleFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+    </fragment>
+
+    <FrameLayout
+        android:id="@+id/news_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+        <fragment
+            android:id="@+id/news_content_frag"
+            android:name="com.example.mechrevo.fragmentbestpractice.NewsContentFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </fragment>
+    </FrameLayout>
+
+</LinearLayout>
