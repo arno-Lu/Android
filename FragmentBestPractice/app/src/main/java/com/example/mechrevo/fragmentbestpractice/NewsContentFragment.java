@@ -10,7 +10,8 @@ import android.widget.TextView;
 /**
  * Created by mechrevo on 2016/4/8.
  */
-public class NewsContentFragment extends Fragment {
+public class NewsContentFragment extends Fragment{
+
     private View view;
 
     @Override
@@ -26,4 +27,5 @@ public class NewsContentFragment extends Fragment {
         newsTitleText.setText(newTitle);
         newsContentText.setText(newContent);
     }
+
 }
