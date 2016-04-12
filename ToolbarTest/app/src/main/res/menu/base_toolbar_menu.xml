@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">  <!--app的命名空间-->
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@mipmap/ic_search"
+        android:title="@string/menu_search"
+        app:showAsAction="ifRoom">         <!--如果有空间的话显示-->
+
+    </item>
+
+    <item
+        android:id="@+id/action_notification"
+        android:icon="@mipmap/ic_notifications"
+        android:title="@string/menu_notifications"
+        app:showAsAction="ifRoom">
+
+    </item>
+
+    <item
+        android:id="@+id/action_item1"
+        android:title="@string/item_01"
+        app:showAsAction="never">
+
+    </item>
+
+    <item
+        android:id="@+id/action_item2"
+        android:title="@string/item_02"
+        app:showAsAction ="never">
+
+    </item>
+
+</menu>
