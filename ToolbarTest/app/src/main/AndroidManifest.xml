@@ -15,7 +15,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Toolbar.ToolBarActivity">
+        <activity android:name="toolbar.ToolBarActivity"
+            android:label="@string/tool_bar">
+
+        </activity>
+        <activity android:name="toolbar.ZhiHuActivity"
+            android:label="ZhiHu">
 
         </activity>
     </application>
