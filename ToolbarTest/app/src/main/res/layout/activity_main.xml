@@ -18,6 +18,16 @@
         android:layout_height="wrap_content"
         android:text="ZhiHu"
         />
+    <Button
+        android:id="@+id/ImageTranslucentBarButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/image_translucent_bar"/>
 
+    <Button
+        android:id="@+id/ColorTranslucentBarButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/color_translucent_bar"/>
 
 </LinearLayout>

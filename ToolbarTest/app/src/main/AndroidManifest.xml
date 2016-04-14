@@ -23,6 +23,16 @@
             android:label="ZhiHu">
 
         </activity>
+        <activity android:name="translucentbar.ImageTranslucentBarActivity"
+            android:label="@string/image_translucent_bar"
+            android:theme="@style/ImageTranslucentTheme">
+
+        </activity>
+        <activity android:name="translucentbar.ColorTranslucentBarActivity"
+            android:label="@string/color_translucent_bar"
+            android:theme="@style/ColorTranslucentTheme">
+
+        </activity>
     </application>
 
 </manifest>
