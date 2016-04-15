@@ -36,4 +36,16 @@
         android:layout_height="wrap_content"
         android:text="@string/simple_drawer"/>
 
+    <Button
+        android:id="@+id/simple_navigation_drawer_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/simple_navigation_drawer"/>
+
+    <Button
+        android:id="@+id/cloud_music_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CloudMusic"/>
+
 </LinearLayout>

@@ -38,6 +38,15 @@
             android:label="@string/simple_drawer">
 
         </activity>
+        <activity android:name="drawerLayoutActivity.SimpleNavigationDrawerActivity"
+            android:label="@string/simple_navigation_drawer"
+            android:theme="@style/Theme.Translucent.Navigation">
+
+        </activity>
+        <activity android:name="drawerLayoutActivity.ColudMusicActivity"
+            android:theme="@style/Theme.Translucent.Navigation">
+
+        </activity>
     </application>
 
 </manifest>
