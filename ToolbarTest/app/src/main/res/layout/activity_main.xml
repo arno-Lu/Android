@@ -30,4 +30,10 @@
         android:layout_height="wrap_content"
         android:text="@string/color_translucent_bar"/>
 
+    <Button
+        android:id="@+id/Simple_Drawer_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/simple_drawer"/>
+
 </LinearLayout>

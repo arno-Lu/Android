@@ -33,6 +33,11 @@
             android:theme="@style/ColorTranslucentTheme">
 
         </activity>
+
+        <activity android:name="drawerLayoutActivity.SimpleDrawerActivity"
+            android:label="@string/simple_drawer">
+
+        </activity>
     </application>
 
 </manifest>

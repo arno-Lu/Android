@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import drawerLayoutActivity.SimpleDrawerActivity;
 import toolbar.ToolBarActivity;
 import toolbar.ZhiHuActivity;
 import translucentbar.ColorTranslucentBarActivity;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button zhihu_button;
     private Button image_button;
     private Button color_button;
+    private Button simple_drawer_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,11 +28,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         zhihu_button = (Button)findViewById(R.id.ZhiHu);
         image_button = (Button)findViewById(R.id.ImageTranslucentBarButton);
         color_button = (Button)findViewById(R.id.ColorTranslucentBarButton);
+        simple_drawer_button = (Button)findViewById(R.id.Simple_Drawer_button);
 
         button_toolbar.setOnClickListener(this);
         zhihu_button.setOnClickListener(this);
         image_button.setOnClickListener(this);
         color_button.setOnClickListener(this);
+        simple_drawer_button.setOnClickListener(this);
     }
 
     @Override
@@ -52,6 +56,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ColorTranslucentBarButton:
                 Intent intent4 = new Intent(MainActivity.this, ColorTranslucentBarActivity.class);
                 startActivity(intent4);
+                break;
+            case R.id.Simple_Drawer_button:
+                Intent intent5 = new Intent(MainActivity.this, SimpleDrawerActivity.class);
+                startActivity(intent5);
                 break;
             default:
                 break;
