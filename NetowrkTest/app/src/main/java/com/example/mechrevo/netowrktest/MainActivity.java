@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
                 HttpURLConnection connection = null;
                 try{
-                    URL url = new URL("http://www.baidu.com/");
+                    URL url = new URL("http://www.baidu.com");
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setDoInput(true);
                     connection.setDoOutput(true);
