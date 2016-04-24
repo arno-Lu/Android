@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.mechrevo.measuretest.MeasureExampleView
+        android:background="@android:color/holo_blue_dark"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!--根据layout-width与layout-height得设置，方便代表EXACTLY与AT_MOST模式，方便不同的Mode，根据measureHeight，Width内部规则修改可-->
+
+</LinearLayout>
