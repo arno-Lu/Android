@@ -1,0 +1,31 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <!-- 顶部标题栏标题文本样式 -->
+    <style name="topbarTittleTheme">
+        <item name="android:textColor">@color/topbar_btn_text_color</item>
+        <!--
+        <item name="android:shadowColor">@color/gray</item>
+        <item name="android:shadowDy">0.5</item>
+        <item name="android:shadowRadius">1</item>
+        -->
+    </style>
+
+
+    <style name="AnimActivityTheme" parent="@android:style/Theme.Light.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/ActivityTranslateAnim</item>
+    </style>
+
+    <style name="ActivityTranslateAnim" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/in_from_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/out_from_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/in_from_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/out_from_left</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <include layout="@layout/comm_topbar_ll"/>
+
+    <Button
+        android:id="@+id/main_select_image"
+        android:text="@string/select_image"
+        android:layout_margin="@dimen/tiny_space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <GridView
+        android:id="@+id/main_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:padding="5dp"
+        android:gravity="center"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:horizontalSpacing="3dp"
+        android:verticalSpacing="3dp" />
+
+</LinearLayout>

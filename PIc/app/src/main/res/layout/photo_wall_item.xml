@@ -1,0 +1,25 @@
+<com.example.mechrevo.pic.customviews.SquareRelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/photo_wall_item_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        android:src="@drawable/empty_photo"
+        android:layout_centerInParent="true" />
+
+    <CheckBox
+        android:id="@+id/photo_wall_item_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:button="@null"
+        android:background="@drawable/selector_checkbox"
+        />
+
+</com.example.mechrevo.pic.customviews.SquareRelativeLayout>
