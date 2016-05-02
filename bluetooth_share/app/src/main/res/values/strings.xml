@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">bluetooth_share</string>
+    <string name="app_item_name">软件：</string>
+
+    <string name="title_search">搜索设备</string>
+    <string name="title_cancle">取消</string>
+    <string name="title_ok">确定</string>
+
+    <string name="title_unfound">未找到蓝牙设备</string>
+    <string name="title_found">已找到蓝牙设备</string>
+    <string name="title_unuse">本机蓝牙设备不可用</string>
+    <string name="title_bound">已经配对的设备</string>
+
+    <string name="title_tip">提示</string>
+    <string name="title_send">确定发送到 %1$s 设备？</string>
+    <string name="title_searching">正在找寻设备，请稍等...</string>
+    <string name="title_sending">已经启动发送，正在发送，请用手机接受..</string>
+    <string name="title_send_fail">发送失败，请重试！</string>
+    <string name="title_apk_nofound">无法找到apk文件，请重新安装</string>
+</resources>
