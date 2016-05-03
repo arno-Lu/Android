@@ -50,8 +50,8 @@ public class FileUtil {
         }
         //apk文件夹命名方式：包名 + "-" + [1-9].apk （1-9可选）
         for(int i=1;i<=9;i++){
-            if(new File(fileName + "-"+ i+"base"+FILE_TYPE).exists()){   //改变为相应文件夹下的base.apk文件
-                return packageName+ "-"+ i+"base"+FILE_TYPE;
+            if(new File(fileName+ "-"+ i+"/"+"base"+FILE_TYPE).exists()){   //改变为相应文件夹下的base.apk文件
+                return "base"+FILE_TYPE;
             }
         }
         return null;

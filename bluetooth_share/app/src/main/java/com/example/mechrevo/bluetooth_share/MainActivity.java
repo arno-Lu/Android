@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             if(bluetoothAdapter == null){
                 alterBuilder.create().show();
             }else {
-                Intent intent = new Intent(MainActivity.this,TipDialogActivity.this);
+                Intent intent = new Intent(MainActivity.this,TipDialogActivity.class);
                 intent.putExtra("pack_name",packageInfos.get(position).applicationInfo.packageName);
                 startActivity(intent);
             }

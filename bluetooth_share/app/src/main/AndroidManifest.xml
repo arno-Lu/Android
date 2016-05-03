@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mechrevo.bluetooth_share">
 
+    <uses-permission android:name="android.permission.BLUETOOTH">
+
+    </uses-permission>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN">
+
+    </uses-permission>
+    <uses-permission android:name="android.permission.FACTORY_TEST">
+
+    </uses-permission>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +23,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".TipDialogActivity">
         </activity>
     </application>
 
