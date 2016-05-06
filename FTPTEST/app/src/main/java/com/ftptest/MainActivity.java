@@ -24,7 +24,7 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 /*参考http://blog.csdn.net/yudajun/article/details/8803356*/
-
+/*需要将user.properties中最后两行代表最大上传于下载速度设置为比较大，不然无法传输大文件*/
 public class MainActivity extends AppCompatActivity {
     private FtpServer mFtpServer;
     private String ftpConfigDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ftpConfig/";
