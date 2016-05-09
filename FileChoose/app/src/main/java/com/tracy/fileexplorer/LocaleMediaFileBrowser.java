@@ -99,8 +99,7 @@ public class LocaleMediaFileBrowser extends BaseActivity implements OnItemClickL
 
 	private void initViews() {
 		// TODO Auto-generated method stub
-		TextView curDir = (TextView) findViewById(R.id.curDir);
-		curDir.setVisibility(View.GONE);
+
 		lv = (ListView) findViewById(R.id.listView);
 		lv.setOnItemClickListener(this);
 		emptyView = (TextView) findViewById(R.id.emptyView);

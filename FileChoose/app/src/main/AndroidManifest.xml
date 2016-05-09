@@ -34,6 +34,9 @@
         <activity
             android:name=".TFileViewer"
             />
+        <activity android:name=".tablayout.MainActivity">
+
+        </activity>
 
     </application>
 

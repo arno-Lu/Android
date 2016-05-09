@@ -192,7 +192,7 @@ public class LocaleFileBrowser extends BaseActivity implements OnItemClickListen
 
 	private void initViews() {
 		// TODO Auto-generated method stub
-		curDir = (TextView) findViewById(R.id.curDir);
+
 		lv = (ListView) findViewById(R.id.listView);
 		lv.setOnItemClickListener(this);
 		emptyView = (TextView) findViewById(R.id.emptyView);

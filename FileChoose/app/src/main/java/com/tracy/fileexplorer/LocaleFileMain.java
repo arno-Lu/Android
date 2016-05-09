@@ -2,6 +2,7 @@ package com.tracy.fileexplorer;
 
 import java.io.File;
 
+import com.tracy.fileexplorer.tablayout.MainActivity;
 import com.tracy.fileexplorer.util.FileUtils;
 
 
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -97,10 +99,8 @@ public class LocaleFileMain extends Activity {
 				startActivityForResult(intent1,REQUEST);
 				break;
 		case R.id.localefile_music:
-			Intent intent5 = new Intent(this,LocaleMediaFileBrowser.class);
-			intent5.putExtra("title", getString(R.string.bxfile_music));
-			intent5.setData(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
-			startActivityForResult(intent5,REQUEST);
+			Intent intent5 = new Intent(this,MainActivity.class);
+			startActivity(intent5);
 			break;
 		case R.id.localefile_video:
 			Intent intent6 = new Intent(this,LocaleMediaFileBrowser.class);
