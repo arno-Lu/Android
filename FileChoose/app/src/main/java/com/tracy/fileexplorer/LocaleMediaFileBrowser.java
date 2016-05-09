@@ -106,15 +106,7 @@ public class LocaleMediaFileBrowser extends BaseActivity implements OnItemClickL
 		localefile_bottom_btn = (Button) findViewById(R.id.localefile_bottom_btn);
 		localefile_bottom_tv = (TextView) findViewById(R.id.localefile_bottom_tv);
 	}
-	
-	public void onClick(View v){
-		switch(v.getId()){
-		case R.id.localefile_bottom_btn:
-			setResult(2);
-			finish();
-			break;
-		}
-	}
+
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -99,14 +99,12 @@ public class LocaleFileMain extends Activity {
 				startActivityForResult(intent1,REQUEST);
 				break;
 		case R.id.localefile_music:
-			Intent intent5 = new Intent(this,MainActivity.class);
+			Intent intent5 = new Intent(this, MainActivity.class);
 			startActivity(intent5);
 			break;
 		case R.id.localefile_video:
-			Intent intent6 = new Intent(this,LocaleMediaFileBrowser.class);
-			intent6.putExtra("title", getString(R.string.bxfile_video));
-			intent6.setData(MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
-			startActivityForResult(intent6,REQUEST);
+			Intent intent6 = new Intent(this, com.tracy.fileexplorer.apklist.MainActivity.class);
+			startActivity(intent6);
 			break;
 		case R.id.localefile_picture:
 			Intent intent7 = new Intent(this,LocaleFileGallery.class);

@@ -44,13 +44,19 @@ public class MainActivity extends AppCompatActivity {
         titles.add("视频");
         titles.add("文件");
 
-        Bundle bundle = new Bundle();
-        bundle.putInt("music",1);
+
         for (int i = 0; i < titles.size(); i++) {
             mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(i)));
         }
         List<Fragment> fragments = new ArrayList<>();
-        Fragment1 fragment1= new Fragment1();
+
+        Fragment_apk fragment_apk = new Fragment_apk();
+        fragments.add(fragment_apk);
+        Fragment_pic fragment_pic =new Fragment_pic();
+        fragments.add(fragment_pic);
+        Bundle bundle = new Bundle();
+        bundle.putInt("music",1);
+        Fragment1 fragment1 = new Fragment1();
         fragment1.setArguments(bundle);
         fragments.add(fragment1);
 

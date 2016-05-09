@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,7 @@ import java.util.List;
 /**
  * Created by mechrevo on 2016/5/9.
  */
-public class Fragment1 extends Fragment implements AdapterView.OnItemClickListener{
+public class Fragment1 extends Fragment implements AdapterView.OnItemClickListener {
 
     private ListView lv;
     private List<TFile> data;
@@ -40,18 +41,18 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
     private Button localefile_bottom_btn;
 
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
 
             // TODO Auto-generated method stub
-            if(1 == msg.what){
+            if (1 == msg.what) {
                 lv.setVisibility(View.VISIBLE);
                 emptyView.setVisibility(View.GONE);
-                adapter = new LocaleFileAdapter(data,getActivity().getApplicationContext(),null,null);
+                adapter = new LocaleFileAdapter(data, getActivity().getApplicationContext(), null, null);
                 lv.setAdapter(adapter);
-            }else if(0 == msg.what){
+            } else if (0 == msg.what) {
                 lv.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
                 emptyView.setText(getString(R.string.curCatagoryNoFiles));
@@ -62,48 +63,50 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
     };
 
     @Override
-    public void onCreate(Bundle saveInstanceState){
+    public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
     }
 
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle saveInstanceState){
-        View mainView = inflater.inflate(R.layout.localefile_browser,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
+        View mainView = inflater.inflate(R.layout.localefile_browser, container, false);
+        bfm = FileManager.getInstance();
+
         lv = (ListView) mainView.findViewById(R.id.listView);
         lv.setOnItemClickListener(this);
         emptyView = (TextView) mainView.findViewById(R.id.emptyView);
         localefile_bottom_btn = (Button) mainView.findViewById(R.id.localefile_bottom_btn);
         localefile_bottom_tv = (TextView) mainView.findViewById(R.id.localefile_bottom_tv);
 
-        bfm = FileManager.getInstance();;
-        Bundle bundle =getArguments();
-        if(bundle.getInt("music")==1) {
-            setData( MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+
+        Bundle bundle = getArguments();
+        if (bundle.getInt("music") == 1) {
+            setData(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
         }
+
         onFileClick();
         return mainView;
     }
 
-    private void setData(final Uri uri){
+    private void setData(final Uri uri) {
         FEApplication app = (FEApplication) getActivity().getApplication();
-        app.execRunnable(new Runnable(){
+        app.execRunnable(new Runnable() {
 
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-                data= bfm.getMediaFiles(getActivity(),uri);
-                if(null != data){
+
+                data = bfm.getMediaFiles(getActivity(), uri);
+                if (null != data) {
                     Collections.sort(data);
                     handler.sendEmptyMessage(1);
-                }
-                else
+                } else
                     handler.sendEmptyMessage(0);
             }
 
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // TODO Auto-generated method stub

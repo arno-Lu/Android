@@ -37,6 +37,9 @@
         <activity android:name=".tablayout.MainActivity">
 
         </activity>
+        <activity android:name=".apklist.MainActivity">
+
+        </activity>
 
     </application>
 

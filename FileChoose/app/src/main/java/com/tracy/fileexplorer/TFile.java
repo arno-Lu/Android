@@ -2,7 +2,14 @@ package com.tracy.fileexplorer;
 
 import java.io.File;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.text.TextUtils;
 
 import com.tracy.fileexplorer.util.FileUtils;
@@ -50,6 +57,7 @@ public class TFile implements Comparable<TFile>, Serializable {
 	private String lastModifyTimeStr;//最后修改时间字符串
 	private MimeType mimeType;//mimeType
 	private FileState fileState;//文件状态
+	private Drawable drawable;
 	
 	public FileState getFileState() {
 		return fileState;
@@ -84,6 +92,9 @@ public class TFile implements Comparable<TFile>, Serializable {
 	public String getLastModifyTimeStr() {
 		return lastModifyTimeStr;
 	}
+	public  Drawable getImage(){return  drawable;}
+
+
 
 	//本地文件builder模式
 	public static class Builder{
@@ -141,6 +152,45 @@ public class TFile implements Comparable<TFile>, Serializable {
 		
 		public TFile build(){
 			return bxFile;
+		}
+	}
+
+	public static class appBuild{
+		TFile bxFile;
+		File apkFile;
+
+		public appBuild(PackageInfo packageInfo,PackageManager mPackageManager){
+			bxFile =new TFile();
+			bxFile.fileName =getApplicationName(packageInfo.packageName,mPackageManager);
+			bxFile.drawable =packageInfo.applicationInfo.loadIcon(mPackageManager);
+			bxFile.filePath=packageInfo.applicationInfo.sourceDir;
+			apkFile = new File(packageInfo.applicationInfo.sourceDir);
+			bxFile.fileSize=apkFile.length();
+			bxFile.fileSizeStr=FileUtils.getFileSizeStr(bxFile.fileSize);
+			bxFile.lastModifyTime =packageInfo.lastUpdateTime;
+			bxFile.lastModifyTimeStr=getDate(packageInfo.lastUpdateTime);
+
+		}
+
+		public TFile build(){return bxFile;}
+
+
+		public static String getDate(long time) {
+		 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		 Date date = new Date(time);
+		 String formatedDate = simpleDateFormat.format(date);
+		 return formatedDate;
+	  }
+
+		public String getApplicationName(String packageName,PackageManager packageManager) {
+			String applicationName=null;
+			try {
+				ApplicationInfo applicationInfo = packageManager.getApplicationInfo(packageName, 0);
+				applicationName = (String) packageManager.getApplicationLabel(applicationInfo);
+			} catch (PackageManager.NameNotFoundException e) {
+
+			}
+			return applicationName;
 		}
 	}
 
