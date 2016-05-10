@@ -7,6 +7,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,7 +46,7 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
 
         @Override
         public void handleMessage(Message msg) {
-
+            super.handleMessage(msg);
             // TODO Auto-generated method stub
             if (1 == msg.what) {
                 lv.setVisibility(View.VISIBLE);
@@ -57,7 +58,7 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
                 emptyView.setVisibility(View.VISIBLE);
                 emptyView.setText(getString(R.string.curCatagoryNoFiles));
             }
-            super.handleMessage(msg);
+
         }
 
     };
@@ -78,33 +79,31 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         localefile_bottom_btn = (Button) mainView.findViewById(R.id.localefile_bottom_btn);
         localefile_bottom_tv = (TextView) mainView.findViewById(R.id.localefile_bottom_tv);
 
-
         Bundle bundle = getArguments();
         if (bundle.getInt("music") == 1) {
             setData(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
         }
-
         onFileClick();
         return mainView;
     }
 
     private void setData(final Uri uri) {
-        FEApplication app = (FEApplication) getActivity().getApplication();
-        app.execRunnable(new Runnable() {
+      new Thread(new Runnable() {
 
             @Override
             public void run() {
                 // TODO Auto-generated method stub
-
                 data = bfm.getMediaFiles(getActivity(), uri);
                 if (null != data) {
                     Collections.sort(data);
+
                     handler.sendEmptyMessage(1);
+
                 } else
                     handler.sendEmptyMessage(0);
             }
 
-        });
+        }).start();
     }
 
     @Override
@@ -145,16 +144,6 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         localefile_bottom_btn.setEnabled(cnt>0);
     }
 
-    @Override
-    public void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-        if(null!=data){
-            data.clear();
-        }
-        data = null;
-        adapter = null;
-        handler = null;
-    }
+
 
 }

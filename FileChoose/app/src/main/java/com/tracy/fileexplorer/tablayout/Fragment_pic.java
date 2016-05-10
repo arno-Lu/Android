@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Created by mechrevo on 2016/5/9.
  */
-public class Fragment_pic extends Fragment implements AdapterView.OnItemClickListener{
+public class Fragment_pic extends Fragment implements AdapterView.OnItemClickListener {
     private String tag = "LocaleFileGallery";
     private GridView gv;
     private MyGVAdapter adapter;
@@ -48,19 +48,19 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
     private AbsListView.LayoutParams gridItemParams;//主要根据不同分辨率设置item宽高
 
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             // TODO Auto-generated method stub
-            if(1 == msg.what){
+            if (1 == msg.what) {
                 syncImageLoader = new SyncImageLoader();
                 choosedFiles = bfm.getChoosedFiles();
-                gridItemParams = new AbsListView.LayoutParams(gridSize,gridSize);
+                gridItemParams = new AbsListView.LayoutParams(gridSize, gridSize);
                 adapter = new MyGVAdapter();
                 gv.setAdapter(adapter);
                 gv.setOnScrollListener(adapter.onScrollListener);
                 gv.setOnItemClickListener(Fragment_pic.this);
-            }else if(0 == msg.what){
+            } else if (0 == msg.what) {
                 gv.setVisibility(View.GONE);
                 emptyView.setVisibility(View.VISIBLE);
                 emptyView.setText(getString(R.string.curCatagoryNoFiles));
@@ -70,36 +70,37 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
     };
 
     @Override
-    public void onCreate(Bundle saveInstanceState ){
+    public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
     }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle saveInstanceState){
-        View mainView = inflater.inflate(R.layout.localefile_gallery,container,false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
+        View mainView = inflater.inflate(R.layout.localefile_gallery, container, false);
         bfm = FileManager.getInstance();
         gv = (GridView) mainView.findViewById(R.id.gridView);
         emptyView = (TextView) mainView.findViewById(R.id.emptyView);
         localefile_bottom_btn = (Button) mainView.findViewById(R.id.localefile_bottom_btn);
         localefile_bottom_tv = (TextView) mainView.findViewById(R.id.localefile_bottom_tv);
         //计算一下在不同分辨率下gridItem应该站的宽度，在adapter里重置一下item宽高
-        gridSize = (Utils.getScreenWidth(getActivity()) - getResources().getDimensionPixelSize(R.dimen.view_8dp)*5)/4 ;// 4列3个间隔，加上左右padding，共计5个
+        gridSize = (Utils.getScreenWidth(getActivity()) - getResources().getDimensionPixelSize(R.dimen.view_8dp) * 5) / 4;// 4列3个间隔，加上左右padding，共计5个
 //		Log.i(tag, "gridSize:"+gridSize);
         onFileClick();
-        return  mainView;
+        return mainView;
     }
 
     @Override
     public void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        if(null == data){
+        if (null == data) {
             FEApplication bxApp = (FEApplication) getActivity().getApplication();
-            bxApp.execRunnable(new Runnable(){
+            bxApp.execRunnable(new Runnable() {
                 @Override
                 public void run() {
                     // TODO Auto-generated method stub
                     data = bfm.getMediaFiles(getActivity(), MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    if(null!=data)
+                    if (null != data)
                         handler.sendEmptyMessage(1);
                     else
                         handler.sendEmptyMessage(0);
@@ -115,10 +116,10 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
         localefile_bottom_tv.setText(bfm.getFilesSizes());
         int cnt = bfm.getFilesCnt();
         localefile_bottom_btn.setText(String.format(getString(R.string.bxfile_choosedCnt), cnt));
-        localefile_bottom_btn.setEnabled(cnt>0);
+        localefile_bottom_btn.setEnabled(cnt > 0);
     }
 
-    @Override
+   /* @Override
     public void onDestroy() {
         // TODO Auto-generated method stub
         if(null!=data)
@@ -128,7 +129,7 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
         data = null;
         adapter = null;
         super.onDestroy();
-    }
+    }*/
 
 
 

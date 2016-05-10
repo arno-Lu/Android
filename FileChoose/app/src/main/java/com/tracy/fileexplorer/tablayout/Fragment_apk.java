@@ -28,19 +28,28 @@ import java.util.List;
 /**
  * Created by mechrevo on 2016/5/9.
  */
-public class Fragment_apk extends Fragment {
-    private Context mContext;
-    private Handler mHandler;
+public class Fragment_apk extends Fragment implements AdapterView.OnItemClickListener{
     private ListView mListView;
     private List<TFile> mAppInfoList;
-    private FrameLayout mRootFrameLayout;
+   // private FrameLayout mRootFrameLayout;
     public final int GET_APK_FINISH = 9527;
-    public ProgressBar mProgressBar;
+    //public ProgressBar mProgressBar;
     private PackageManager mPackageManager;
     private ListViewAdapter mListViewAdapter;
-    private ItemClickListenerImpl mItemClickListenerImpl;
     private FileManager bfm;
 
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+
+            if (msg.what == GET_APK_FINISH) {
+                //dismissProgressBar();
+                mListViewAdapter.notifyDataSetChanged();
+            }
+            super.handleMessage(msg);
+
+        }
+    };
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,18 +57,17 @@ public class Fragment_apk extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        mContext = getContext();
         mPackageManager = getActivity().getPackageManager();
         View mainView = inflater.inflate(R.layout.activity_main_apk, container, false);
+
         mListView = (ListView) mainView.findViewById(R.id.listView);
-        mProgressBar = new ProgressBar(mContext);
-        mItemClickListenerImpl = new ItemClickListenerImpl();
+        //mProgressBar = new ProgressBar(mContext);
 
         mAppInfoList = new ArrayList<TFile>();
-        mListViewAdapter = new ListViewAdapter(mContext);
+        mListViewAdapter = new ListViewAdapter(getActivity());
         mListViewAdapter.setList(mAppInfoList);
         mListView.setAdapter(mListViewAdapter);
-        mListView.setOnItemClickListener(mItemClickListenerImpl);
+        mListView.setOnItemClickListener(this);
         // showProgressBar();
 
         new Thread(new Runnable() {
@@ -67,33 +75,24 @@ public class Fragment_apk extends Fragment {
             public void run() {
                 mAppInfoList.clear();
                 mAppInfoList.addAll(getAllAppInfo());
-                mHandler.sendEmptyMessage(GET_APK_FINISH);
+                handler.sendEmptyMessage(GET_APK_FINISH);
             }
         }).start();
 
 
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                if (msg.what == GET_APK_FINISH) {
-                    //dismissProgressBar();
-                    mListViewAdapter.notifyDataSetChanged();
-                }
-            }
-        };
+
         return mainView;
     }
 
 
-    private class ItemClickListenerImpl implements AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3){
             TFile apkFile = mAppInfoList.get(position);
             bfm = FileManager.getInstance();
             CheckBox fileCheckBox = (CheckBox) view.findViewById(R.id.fileCheckBox);
-
             List<TFile> choosedFiles = bfm.getChoosedFiles();
+
             if (choosedFiles.contains(apkFile)) {
                 choosedFiles.remove(apkFile);
                 fileCheckBox.setChecked(false);
@@ -103,7 +102,8 @@ public class Fragment_apk extends Fragment {
                 fileCheckBox.setChecked(true);
             }
         }
-    }
+
+
 
 
     /**
@@ -125,6 +125,8 @@ public class Fragment_apk extends Fragment {
         }
         return mAppInfoList;
     }
+
+
 }
 
 
