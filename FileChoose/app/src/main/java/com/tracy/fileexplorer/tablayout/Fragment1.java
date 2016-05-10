@@ -40,7 +40,8 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
     private FileManager bfm;
     private TextView localefile_bottom_tv;
     private Button localefile_bottom_btn;
-
+    private View local_bottom;
+    private Button clear_bottom_btn;
 
     private Handler handler = new Handler() {
 
@@ -78,12 +79,13 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         emptyView = (TextView) mainView.findViewById(R.id.emptyView);
         localefile_bottom_btn = (Button) mainView.findViewById(R.id.localefile_bottom_btn);
         localefile_bottom_tv = (TextView) mainView.findViewById(R.id.localefile_bottom_tv);
+        clear_bottom_btn =(Button)mainView.findViewById(R.id.clear_bottom_btn);
+        local_bottom=mainView.findViewById(R.id.localefile_bottom);
 
         Bundle bundle = getArguments();
         if (bundle.getInt("music") == 1) {
             setData(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
         }
-        onFileClick();
         return mainView;
     }
 
@@ -131,19 +133,25 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
             choosedFiles.add(bxfile);
             fileCheckBox.setChecked(true);
         }
-
         onFileClick();
     }
 
     //点击文件，触发ui更新
     //onResume，触发ui更新
     private void onFileClick() {
-        localefile_bottom_tv.setText(bfm.getFilesSizes());
-        int cnt = bfm.getFilesCnt();
-        localefile_bottom_btn.setText(String.format(getString(R.string.bxfile_choosedCnt), cnt));
-        localefile_bottom_btn.setEnabled(cnt>0);
-    }
 
+        int cnt = bfm.getFilesCnt();
+        if(cnt==0){
+            local_bottom.setVisibility(View.GONE);
+        }else {
+            local_bottom.setVisibility(View.VISIBLE);
+
+            localefile_bottom_tv.setText(bfm.getFilesSizes());
+            localefile_bottom_btn.setText(String.format(getString(R.string.bxfile_choosedCnt), cnt));
+            localefile_bottom_btn.setEnabled(cnt>0);
+        }
+
+    }
 
 
 }

@@ -41,6 +41,8 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
     private FileManager bfm;
     private TextView localefile_bottom_tv;
     private Button localefile_bottom_btn;
+    private View local_bottom;
+    private Button clear_bottom_btn;
 
     private List<TFile> choosedFiles;
     private SyncImageLoader syncImageLoader;
@@ -82,10 +84,12 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
         emptyView = (TextView) mainView.findViewById(R.id.emptyView);
         localefile_bottom_btn = (Button) mainView.findViewById(R.id.localefile_bottom_btn);
         localefile_bottom_tv = (TextView) mainView.findViewById(R.id.localefile_bottom_tv);
+        clear_bottom_btn =(Button)mainView.findViewById(R.id.clear_bottom_btn);
+        local_bottom=mainView.findViewById(R.id.localefile_bottom);
+
         //计算一下在不同分辨率下gridItem应该站的宽度，在adapter里重置一下item宽高
         gridSize = (Utils.getScreenWidth(getActivity()) - getResources().getDimensionPixelSize(R.dimen.view_8dp) * 5) / 4;// 4列3个间隔，加上左右padding，共计5个
 //		Log.i(tag, "gridSize:"+gridSize);
-        onFileClick();
         return mainView;
     }
 
@@ -113,10 +117,18 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
     //点击文件，触发ui更新
     //onResume，触发ui更新
     private void onFileClick() {
-        localefile_bottom_tv.setText(bfm.getFilesSizes());
+
         int cnt = bfm.getFilesCnt();
-        localefile_bottom_btn.setText(String.format(getString(R.string.bxfile_choosedCnt), cnt));
-        localefile_bottom_btn.setEnabled(cnt > 0);
+        if(cnt==0){
+            local_bottom.setVisibility(View.GONE);
+        }else {
+            local_bottom.setVisibility(View.VISIBLE);
+
+            localefile_bottom_tv.setText(bfm.getFilesSizes());
+            localefile_bottom_btn.setText(String.format(getString(R.string.bxfile_choosedCnt), cnt));
+            localefile_bottom_btn.setEnabled(cnt>0);
+        }
+
     }
 
    /* @Override
@@ -242,6 +254,7 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
                     Log.i(tag, " onError View not exists");
                 }
             }
+
 
         };
     }
