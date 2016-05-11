@@ -38,6 +38,9 @@ public class Fragment_apk extends Fragment implements AdapterView.OnItemClickLis
     private ListViewAdapter mListViewAdapter;
     private FileManager bfm;
 
+
+
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {

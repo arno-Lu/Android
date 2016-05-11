@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * Created by mechrevo on 2016/5/9.
  */
-public class Fragment1 extends Fragment implements AdapterView.OnItemClickListener {
+public class Fragment1 extends Fragment implements AdapterView.OnItemClickListener{
 
     private ListView lv;
     private List<TFile> data;
@@ -42,6 +42,18 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
     private Button localefile_bottom_btn;
     private View local_bottom;
     private Button clear_bottom_btn;
+
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser){  //判断Fragment是否为当前页面
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()){
+            onFileClick();
+        }
+
+    }
+
 
     private Handler handler = new Handler() {
 
@@ -71,7 +83,7 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
-        View mainView = inflater.inflate(R.layout.localefile_browser, container, false);
+        final View mainView = inflater.inflate(R.layout.localefile_browser, container, false);
         bfm = FileManager.getInstance();
 
         lv = (ListView) mainView.findViewById(R.id.listView);
@@ -86,7 +98,22 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         if (bundle.getInt("music") == 1) {
             setData(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
         }
+
+        onFileClick();
         return mainView;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle saveInstanceState){
+        super.onActivityCreated(saveInstanceState);
+        Button clear_btn =(Button)getActivity().findViewById(R.id.clear_bottom_btn);
+        clear_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<TFile> choosedFiles = bfm.getChoosedFiles();
+                choosedFiles.clear();
+            }
+        });
     }
 
     private void setData(final Uri uri) {
@@ -108,23 +135,14 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         }).start();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
-        if(0 == item.getItemId()){
-            getActivity().setResult(1);
-            getActivity().finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     //点击文件进行勾选操作
     @Override
     public void onItemClick(AdapterView<?> arg0, View view, int pos, long arg3) {
         CheckBox fileCheckBox = (CheckBox) view.findViewById(R.id.fileCheckBox);
         TFile bxfile = data.get(pos);
-
         List<TFile> choosedFiles = bfm.getChoosedFiles();
+
         if (choosedFiles.contains(bxfile)) {
             choosedFiles.remove(bxfile);
             fileCheckBox.setChecked(false);
@@ -139,7 +157,6 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
     //点击文件，触发ui更新
     //onResume，触发ui更新
     private void onFileClick() {
-
         int cnt = bfm.getFilesCnt();
         if(cnt==0){
             local_bottom.setVisibility(View.GONE);
@@ -152,6 +169,5 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         }
 
     }
-
 
 }

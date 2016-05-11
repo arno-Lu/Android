@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -50,6 +51,15 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
     private AbsListView.LayoutParams gridItemParams;//主要根据不同分辨率设置item宽高
 
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser){
+        super.setUserVisibleHint(isVisibleToUser);
+        if(getUserVisibleHint()){
+            onFileClick();
+        }
+
+    }
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -74,6 +84,7 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
+
     }
 
     @Override
@@ -87,11 +98,15 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
         clear_bottom_btn =(Button)mainView.findViewById(R.id.clear_bottom_btn);
         local_bottom=mainView.findViewById(R.id.localefile_bottom);
 
+
+
         //计算一下在不同分辨率下gridItem应该站的宽度，在adapter里重置一下item宽高
         gridSize = (Utils.getScreenWidth(getActivity()) - getResources().getDimensionPixelSize(R.dimen.view_8dp) * 5) / 4;// 4列3个间隔，加上左右padding，共计5个
 //		Log.i(tag, "gridSize:"+gridSize);
         return mainView;
     }
+
+
 
     @Override
     public void onResume() {
@@ -120,6 +135,7 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
 
         int cnt = bfm.getFilesCnt();
         if(cnt==0){
+
             local_bottom.setVisibility(View.GONE);
         }else {
             local_bottom.setVisibility(View.VISIBLE);

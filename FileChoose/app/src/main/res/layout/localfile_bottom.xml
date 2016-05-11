@@ -44,7 +44,7 @@
         android:background="@drawable/localefile_send_bg"
         android:enabled="false"
         android:onClick="onClick"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="150dp"
         android:paddingTop="@dimen/view_6dp"
         android:paddingBottom="@dimen/view_6dp"
         android:paddingLeft="@dimen/view_6dp"

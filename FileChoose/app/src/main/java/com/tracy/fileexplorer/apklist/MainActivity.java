@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
     private ItemClickListenerImpl mItemClickListenerImpl;
     private FileManager bfm;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

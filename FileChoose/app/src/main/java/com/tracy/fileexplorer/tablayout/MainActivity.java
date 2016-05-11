@@ -1,19 +1,24 @@
 package com.tracy.fileexplorer.tablayout;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.TextView;
 
+
+import com.tracy.fileexplorer.FileManager;
 import com.tracy.fileexplorer.R;
+import com.tracy.fileexplorer.TFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private Button clear_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,12 @@ public class MainActivity extends AppCompatActivity {
         initViewPager();
 
     }
+
+
+
+
+
+
 
     private void initViewPager() {
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
