@@ -1,5 +1,6 @@
 package com.tracy.fileexplorer.tablayout;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -38,21 +39,8 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
     private LocaleFileAdapter adapter;
     private TextView emptyView;
     private FileManager bfm;
-    private TextView localefile_bottom_tv;
-    private Button localefile_bottom_btn;
-    private View local_bottom;
-    private Button clear_bottom_btn;
 
 
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser){  //判断Fragment是否为当前页面
-        super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()){
-            onFileClick();
-        }
-
-    }
 
 
     private Handler handler = new Handler() {
@@ -89,32 +77,16 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         lv = (ListView) mainView.findViewById(R.id.listView);
         lv.setOnItemClickListener(this);
         emptyView = (TextView) mainView.findViewById(R.id.emptyView);
-        localefile_bottom_btn = (Button) mainView.findViewById(R.id.localefile_bottom_btn);
-        localefile_bottom_tv = (TextView) mainView.findViewById(R.id.localefile_bottom_tv);
-        clear_bottom_btn =(Button)mainView.findViewById(R.id.clear_bottom_btn);
-        local_bottom=mainView.findViewById(R.id.localefile_bottom);
 
         Bundle bundle = getArguments();
         if (bundle.getInt("music") == 1) {
             setData(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
         }
 
-        onFileClick();
         return mainView;
     }
 
-    @Override
-    public void onActivityCreated(Bundle saveInstanceState){
-        super.onActivityCreated(saveInstanceState);
-        Button clear_btn =(Button)getActivity().findViewById(R.id.clear_bottom_btn);
-        clear_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                List<TFile> choosedFiles = bfm.getChoosedFiles();
-                choosedFiles.clear();
-            }
-        });
-    }
+
 
     private void setData(final Uri uri) {
       new Thread(new Runnable() {
@@ -146,28 +118,20 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         if (choosedFiles.contains(bxfile)) {
             choosedFiles.remove(bxfile);
             fileCheckBox.setChecked(false);
+
         } else {
 
             choosedFiles.add(bxfile);
             fileCheckBox.setChecked(true);
+
         }
-        onFileClick();
+        send_cnt_change();
     }
 
-    //点击文件，触发ui更新
-    //onResume，触发ui更新
-    private void onFileClick() {
-        int cnt = bfm.getFilesCnt();
-        if(cnt==0){
-            local_bottom.setVisibility(View.GONE);
-        }else {
-            local_bottom.setVisibility(View.VISIBLE);
+   private void send_cnt_change(){
+       Intent intent_cnt = new Intent("change");
+       getActivity().sendBroadcast(intent_cnt);
 
-            localefile_bottom_tv.setText(bfm.getFilesSizes());
-            localefile_bottom_btn.setText(String.format(getString(R.string.bxfile_choosedCnt), cnt));
-            localefile_bottom_btn.setEnabled(cnt>0);
-        }
-
-    }
+   }
 
 }

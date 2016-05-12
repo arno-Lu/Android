@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.tracy.fileexplorer" >
-    
+    package="com.tracy.fileexplorer">
+
     <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -10,10 +10,10 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".LocaleFileMain"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,25 +21,13 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".LocaleFileBrowser"
-            />
-        <activity
-            android:name=".LocaleMediaFileBrowser"
-            />
-        <activity
-            android:name=".LocaleFileGallery"
-            />
+        <activity android:name=".LocaleFileBrowser" />
+        <activity android:name=".LocaleMediaFileBrowser" />
+        <activity android:name=".LocaleFileGallery" />
+        <activity android:name=".TFileViewer" />
+        <activity android:name=".tablayout.MainActivity"></activity>
+        <activity android:name=".apklist.MainActivity"></activity>
 
-        <activity
-            android:name=".TFileViewer"
-            />
-        <activity android:name=".tablayout.MainActivity">
-
-        </activity>
-        <activity android:name=".apklist.MainActivity">
-
-        </activity>
 
     </application>
 

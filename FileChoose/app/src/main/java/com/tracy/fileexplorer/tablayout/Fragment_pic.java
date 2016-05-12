@@ -51,14 +51,7 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
     private AbsListView.LayoutParams gridItemParams;//主要根据不同分辨率设置item宽高
 
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser){
-        super.setUserVisibleHint(isVisibleToUser);
-        if(getUserVisibleHint()){
-            onFileClick();
-        }
 
-    }
 
     private Handler handler = new Handler() {
         @Override
@@ -147,17 +140,7 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
 
     }
 
-   /* @Override
-    public void onDestroy() {
-        // TODO Auto-generated method stub
-        if(null!=data)
-            data.clear();
-        syncImageLoader = null;
-        handler = null;
-        data = null;
-        adapter = null;
-        super.onDestroy();
-    }*/
+
 
 
 
@@ -289,7 +272,6 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
             checkView.setVisibility(View.VISIBLE);
         }
 
-        onFileClick();
     }
 
 }
