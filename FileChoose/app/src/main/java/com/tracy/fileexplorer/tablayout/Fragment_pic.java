@@ -1,5 +1,6 @@
 package com.tracy.fileexplorer.tablayout;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -86,11 +87,6 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
         bfm = FileManager.getInstance();
         gv = (GridView) mainView.findViewById(R.id.gridView);
         emptyView = (TextView) mainView.findViewById(R.id.emptyView);
-        localefile_bottom_btn = (Button) mainView.findViewById(R.id.localefile_bottom_btn);
-        localefile_bottom_tv = (TextView) mainView.findViewById(R.id.localefile_bottom_tv);
-        clear_bottom_btn =(Button)mainView.findViewById(R.id.clear_bottom_btn);
-        local_bottom=mainView.findViewById(R.id.localefile_bottom);
-
 
 
         //计算一下在不同分辨率下gridItem应该站的宽度，在adapter里重置一下item宽高
@@ -124,23 +120,19 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
 
     //点击文件，触发ui更新
     //onResume，触发ui更新
-    private void onFileClick() {
-
-        int cnt = bfm.getFilesCnt();
-        if(cnt==0){
-
-            local_bottom.setVisibility(View.GONE);
-        }else {
-            local_bottom.setVisibility(View.VISIBLE);
-
-            localefile_bottom_tv.setText(bfm.getFilesSizes());
-            localefile_bottom_btn.setText(String.format(getString(R.string.bxfile_choosedCnt), cnt));
-            localefile_bottom_btn.setEnabled(cnt>0);
-        }
-
-    }
 
 
+   /* @Override
+    public void onDestroy() {
+        // TODO Auto-generated method stub
+        if(null!=data)
+            data.clear();
+        syncImageLoader = null;
+        handler = null;
+        data = null;
+        adapter = null;
+        super.onDestroy();
+    }*/
 
 
 
@@ -271,7 +263,15 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
             choosedFiles.add(bxfile);
             checkView.setVisibility(View.VISIBLE);
         }
+        int cnt = bfm.getFilesCnt();
+        sendBroadcast(cnt);
 
+    }
+
+    public void sendBroadcast(int cnt){
+        Intent intent = new Intent("send_cnt_change");
+        intent.putExtra("cnt",cnt);
+        getActivity().sendBroadcast(intent);
     }
 
 }

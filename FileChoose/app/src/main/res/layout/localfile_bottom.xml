@@ -6,8 +6,8 @@
     android:background="@drawable/bx_bottom_msg_bg"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:visibility="gone"
-    android:padding="@dimen/view_10dp">
+    android:padding="@dimen/view_10dp"
+    android:visibility="gone">
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         android:background="@drawable/localefile_send_bg"
         android:enabled="false"
         android:onClick="onClick"
-        android:layout_marginLeft="120dp"
+        android:layout_marginLeft="130dp"
         android:paddingTop="@dimen/view_6dp"
         android:paddingBottom="@dimen/view_6dp"
         android:paddingLeft="@dimen/view_6dp"

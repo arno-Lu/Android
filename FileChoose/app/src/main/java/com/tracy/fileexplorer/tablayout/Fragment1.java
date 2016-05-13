@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,6 +40,11 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
     private LocaleFileAdapter adapter;
     private TextView emptyView;
     private FileManager bfm;
+    private TextView localefile_bottom_tv;
+    private Button localefile_bottom_btn;
+    private View local_bottom;
+    private Button clear_bottom_btn;
+
 
 
 
@@ -77,6 +83,7 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         lv = (ListView) mainView.findViewById(R.id.listView);
         lv.setOnItemClickListener(this);
         emptyView = (TextView) mainView.findViewById(R.id.emptyView);
+
 
         Bundle bundle = getArguments();
         if (bundle.getInt("music") == 1) {
@@ -118,20 +125,22 @@ public class Fragment1 extends Fragment implements AdapterView.OnItemClickListen
         if (choosedFiles.contains(bxfile)) {
             choosedFiles.remove(bxfile);
             fileCheckBox.setChecked(false);
-
         } else {
 
             choosedFiles.add(bxfile);
             fileCheckBox.setChecked(true);
-
         }
-        send_cnt_change();
+        int cnt = bfm.getFilesCnt();
+        sendBroadcast(cnt);
     }
 
-   private void send_cnt_change(){
-       Intent intent_cnt = new Intent("change");
-       getActivity().sendBroadcast(intent_cnt);
+    public void sendBroadcast(int cnt){
+        Intent intent = new Intent("send_cnt_change");
+        intent.putExtra("cnt",cnt);
+        getActivity().sendBroadcast(intent);
 
-   }
+    }
+
+
 
 }

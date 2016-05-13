@@ -36,6 +36,5 @@
             android:verticalSpacing="@dimen/view_8dp" />
     </RelativeLayout>
 
-    <include layout="@layout/localfile_bottom" />
 
 </LinearLayout>

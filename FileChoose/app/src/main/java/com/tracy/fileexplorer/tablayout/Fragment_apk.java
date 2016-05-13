@@ -1,6 +1,7 @@
 package com.tracy.fileexplorer.tablayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -104,6 +105,8 @@ public class Fragment_apk extends Fragment implements AdapterView.OnItemClickLis
                 choosedFiles.add(apkFile);
                 fileCheckBox.setChecked(true);
             }
+        int cnt = bfm.getFilesCnt();
+        sendBroadcast(cnt);
         }
 
 
@@ -127,6 +130,13 @@ public class Fragment_apk extends Fragment implements AdapterView.OnItemClickLis
             }
         }
         return mAppInfoList;
+    }
+
+
+    public void sendBroadcast(int cnt){
+        Intent intent = new Intent("send_cnt_change");
+        intent.putExtra("cnt",cnt);
+        getActivity().sendBroadcast(intent);
     }
 
 
