@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">kuaichuan</string>
+    <string name="connect">已连接</string>
+    <string name="disconnect">未连接</string>
+    <string name="download">下载</string>
+    <string name="user_name">用户名</string>
+    <string name="setting">设置</string>
+    <string name="filter_size">最小文件大小</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/user_name"
+            android:title="@string/user_name">
+
+        </item>
+    </group>
+    <item android:title="@string/setting">
+        <menu>
+            <item
+                android:id="@+id/filter_size"
+                android:title="@string/filter_size"/>
+        </menu>
+    </item>
+</menu>
