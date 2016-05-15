@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bind_bg"
+    android:id="@+id/main_other_id">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/view_10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="路径查找"/>
+            <LinearLayout
+                android:id="@+id/localefile_ram"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_middle"
+                android:clickable="true" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_file_icon_ram" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/bxfile_ram" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/localefile_sdcard"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_down"
+                android:clickable="true" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_file_icon_sdcard" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/bxfile_sdcard" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/localefile_extSdcard"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_down"
+                android:clickable="true"
+                android:visibility="gone" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_file_icon_sdcard" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/bxfile_extsdcard" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/view_10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/view_10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="压缩文档"/>
+
+            <LinearLayout
+                android:id="@+id/localefile_zip"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_middle"
+                android:clickable="true" >
+
+                <ImageView
+                    android:layout_width="@dimen/view_30dp"
+                    android:layout_height="@dimen/view_30dp"
+                    android:src="@drawable/bxfile_file_zip" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="ZIP文档" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/localefile_rar"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_middle"
+                android:clickable="true" >
+
+                <ImageView
+                    android:layout_width="@dimen/view_30dp"
+                    android:layout_height="@dimen/view_30dp"
+                    android:src="@drawable/bxfile_file_zip" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:text="RAR文档" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

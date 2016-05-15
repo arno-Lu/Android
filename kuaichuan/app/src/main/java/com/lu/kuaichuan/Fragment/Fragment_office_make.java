@@ -84,6 +84,10 @@ public class Fragment_office_make extends Fragment implements AdapterView.OnItem
             setData("(" + MediaStore.Files.FileColumns.MIME_TYPE + "=='application/pdf')");
         if (bundle.getString("Type")=="TXT")
             setData("(" + MediaStore.Files.FileColumns.MIME_TYPE + "=='text/plain')");
+        if (bundle.getString("Type")=="ZIP")
+            setData("(" + MediaStore.Files.FileColumns.MIME_TYPE + "=='application/zip')");
+        if (bundle.getString("Type")=="RAR")
+            setData("(" + MediaStore.Files.FileColumns.MIME_TYPE + "=='application/x-rar-compressed')");
 
         return mainView;
     }

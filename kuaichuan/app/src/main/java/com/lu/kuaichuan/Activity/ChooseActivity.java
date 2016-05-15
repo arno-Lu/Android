@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.BoolRes;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -22,9 +23,12 @@ import android.widget.Toast;
 
 import com.lu.kuaichuan.File.FileManager;
 import com.lu.kuaichuan.File.TFile;
-import com.lu.kuaichuan.Fragment.FragmentAdapter;
-import com.lu.kuaichuan.Fragment.FragmentMake;
+import com.lu.kuaichuan.Adapter.FragmentAdapter;
+import com.lu.kuaichuan.Fragment.Fragment_browser;
+import com.lu.kuaichuan.Fragment.Fragment_media_make;
 import com.lu.kuaichuan.Fragment.Fragment_apk;
+import com.lu.kuaichuan.Fragment.Fragment_office_main;
+import com.lu.kuaichuan.Fragment.Fragment_other_main;
 import com.lu.kuaichuan.Fragment.Fragment_pic;
 
 import java.util.ArrayList;
@@ -45,6 +49,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     private Button clear_button;
     private TextView localfile_bottom_tv;
 
+    boolean State=false;
     FileManager bfm = FileManager.getInstance();
 
 
@@ -66,7 +71,10 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         initToolBar();
         initNavigationDrawer();
         initViewPager();
+
+
     }
+
 
     @Override
     public void onDestroy(){
@@ -90,6 +98,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+
     private BroadcastReceiver cntChangeBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -105,6 +114,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
             }
         }
     };
+
 
     private void initToolBar(){
 
@@ -185,30 +195,28 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         Fragment_pic fragment_pic = new Fragment_pic();
 
         Bundle bundle_music = new Bundle();
-        bundle_music.putString("Flag","Music");
-        FragmentMake fragment_music = new FragmentMake();
+        bundle_music.putString("Type","Music");
+        Fragment_media_make fragment_music = new Fragment_media_make();
         fragment_music.setArguments(bundle_music);
 
         Bundle bundle_video =new Bundle();
-        bundle_video.putString("Flag","Video");
-        FragmentMake fragment_video = new FragmentMake();
+        bundle_video.putString("Type","Video");
+        Fragment_media_make fragment_video = new Fragment_media_make();
         fragment_video.setArguments(bundle_video);
 
         Fragment_apk fragment_apk = new Fragment_apk();
+
+        Fragment_office_main fragment_office_decide = new Fragment_office_main();
+
+        Fragment_other_main fragment_other_main = new Fragment_other_main();
+
 
         fragments.add(fragment_pic);
         fragments.add(fragment_music);
         fragments.add(fragment_video);
         fragments.add(fragment_apk);
-        /*Fragment_apk fragment_apk = new Fragment_apk();
-        fragments.add(fragment_apk);
-        Fragment_pic fragment_pic =new Fragment_pic();
-        fragments.add(fragment_pic);
-        Bundle bundle = new Bundle();
-        bundle.putInt("music",1);
-        Fragment1 fragment1 = new Fragment1();
-        fragment1.setArguments(bundle);
-        fragments.add(fragment1);*/
+        fragments.add(fragment_office_decide);
+        fragments.add(fragment_other_main);
 
 
         FragmentAdapter mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(),fragments,titles);

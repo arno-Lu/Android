@@ -38,8 +38,7 @@
                   android:id="@+id/tabs"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  app:tabIndicatorColor="#ADBE107E"
-                  app:tabMode="scrollable"/>
+                  app:tabIndicatorColor="#ADBE107E" />
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager

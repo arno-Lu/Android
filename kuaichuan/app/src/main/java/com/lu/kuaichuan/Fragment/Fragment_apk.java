@@ -1,6 +1,7 @@
 package com.lu.kuaichuan.Fragment;
 
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -60,7 +61,7 @@ public class Fragment_apk extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         mPackageManager = getActivity().getPackageManager();
-        View mainView = inflater.inflate(R.layout.activity_main_apk, container, false);
+        View mainView = inflater.inflate(R.layout.fragment_apk_main, container, false);
 
         mListView = (ListView) mainView.findViewById(R.id.listView);
         //mProgressBar = new ProgressBar(mContext);
@@ -121,11 +122,15 @@ public class Fragment_apk extends Fragment implements AdapterView.OnItemClickLis
         List<PackageInfo> packageInfoList = mPackageManager.getInstalledPackages(0);
         for (int i = 0; i < packageInfoList.size(); i++) {
             PackageInfo packageInfo = packageInfoList.get(i);
-            //获取应用名称
-            TFile.appBuild builder = new TFile.appBuild(packageInfo, mPackageManager);
-            TFile bxfile = builder.build();
-            if (bxfile != null) {
-                mAppInfoList.add(bxfile);
+            if((packageInfo.applicationInfo.flags& ApplicationInfo.FLAG_SYSTEM)>0) { //只获取用户应用，排除系统应用
+                //获取应用名称
+                continue;
+                }else {
+                    TFile.appBuild builder = new TFile.appBuild(packageInfo, mPackageManager);
+                    TFile bxfile = builder.build();
+                    if (bxfile != null) {
+                        mAppInfoList.add(bxfile);
+                }
             }
         }
         return mAppInfoList;

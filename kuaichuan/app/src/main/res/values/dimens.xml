@@ -11,7 +11,8 @@
     <dimen name="text_18sp">18sp</dimen>
     <dimen name="text_20sp">20sp</dimen>
     <dimen name="text_22sp">22sp</dimen>
-    
+
+
     <dimen name="view_4dp">4dp</dimen>
     <dimen name="view_6dp">6dp</dimen>
     <dimen name="view_8dp">8dp</dimen>
@@ -19,6 +20,7 @@
     <dimen name="view_20dp">20dp</dimen>
     <dimen name="view_26dp">26dp</dimen>
     <dimen name="view_36dp">36dp</dimen>
+    <dimen name="view_30dp">30dp</dimen>
     <dimen name="view_40dp">40dp</dimen>
     <dimen name="view_50dp">50dp</dimen>
     <dimen name="view_60dp">60dp</dimen>

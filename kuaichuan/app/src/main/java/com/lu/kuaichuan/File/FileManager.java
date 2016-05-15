@@ -40,6 +40,7 @@ public class FileManager {
         map.put(".amr", MimeType.MUSIC);
         map.put(".mp3", MimeType.MUSIC);
         map.put(".ogg", MimeType.MUSIC);
+        map.put(".flac",MimeType.MUSIC);
         map.put(".wav", MimeType.MUSIC);
         map.put(".3gp", MimeType.VIDEO);
         map.put(".mp4", MimeType.VIDEO);
