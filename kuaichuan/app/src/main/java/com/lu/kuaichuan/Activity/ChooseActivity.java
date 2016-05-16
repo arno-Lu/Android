@@ -24,7 +24,8 @@ import android.widget.Toast;
 import com.lu.kuaichuan.File.FileManager;
 import com.lu.kuaichuan.File.TFile;
 import com.lu.kuaichuan.Adapter.FragmentAdapter;
-import com.lu.kuaichuan.Fragment.Fragment_browser;
+import com.lu.kuaichuan.Fragment.Fragment_connect_mian;
+import com.lu.kuaichuan.Fragment.Fragment_media_main;
 import com.lu.kuaichuan.Fragment.Fragment_media_make;
 import com.lu.kuaichuan.Fragment.Fragment_apk;
 import com.lu.kuaichuan.Fragment.Fragment_office_main;
@@ -49,7 +50,6 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     private Button clear_button;
     private TextView localfile_bottom_tv;
 
-    boolean State=false;
     FileManager bfm = FileManager.getInstance();
 
 
@@ -192,17 +192,12 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         }
         List<Fragment> fragments = new ArrayList<>();
 
+
+        Fragment_connect_mian fragment_connect_mian =new Fragment_connect_mian();
+
         Fragment_pic fragment_pic = new Fragment_pic();
 
-        Bundle bundle_music = new Bundle();
-        bundle_music.putString("Type","Music");
-        Fragment_media_make fragment_music = new Fragment_media_make();
-        fragment_music.setArguments(bundle_music);
-
-        Bundle bundle_video =new Bundle();
-        bundle_video.putString("Type","Video");
-        Fragment_media_make fragment_video = new Fragment_media_make();
-        fragment_video.setArguments(bundle_video);
+        Fragment_media_main fragment_media_main = new Fragment_media_main();
 
         Fragment_apk fragment_apk = new Fragment_apk();
 
@@ -211,9 +206,9 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         Fragment_other_main fragment_other_main = new Fragment_other_main();
 
 
+        fragments.add(fragment_connect_mian);
         fragments.add(fragment_pic);
-        fragments.add(fragment_music);
-        fragments.add(fragment_video);
+        fragments.add(fragment_media_main);
         fragments.add(fragment_apk);
         fragments.add(fragment_office_decide);
         fragments.add(fragment_other_main);

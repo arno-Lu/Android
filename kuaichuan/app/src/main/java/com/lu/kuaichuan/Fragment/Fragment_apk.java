@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
+
 import com.lu.kuaichuan.Adapter.ListViewAdapter;
 import com.lu.kuaichuan.File.FEApplication;
 import com.lu.kuaichuan.File.FileManager;
@@ -58,6 +59,7 @@ public class Fragment_apk extends Fragment implements AdapterView.OnItemClickLis
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         mPackageManager = getActivity().getPackageManager();
@@ -82,11 +84,9 @@ public class Fragment_apk extends Fragment implements AdapterView.OnItemClickLis
                 handler.sendEmptyMessage(GET_APK_FINISH);
             }
         });
-
-
-
         return mainView;
     }
+
 
 
 

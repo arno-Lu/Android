@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/media_main_id"
+    android:background="@color/bind_bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/view_10dp">
+
+
+        <LinearLayout
+            android:id="@+id/media_music"
+            style="@style/localeFileMainItemStyle"
+            android:background="@drawable/selector_tab_up"
+            android:clickable="true">
+
+            <ImageView
+                android:layout_width="@dimen/view_40dp"
+                android:layout_height="@dimen/view_40dp"
+                android:src="@drawable/bxfile_file_icon_music"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/view_10dp"
+                android:text="音乐"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bxfile_arrow_right_normal"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/media_video"
+            style="@style/localeFileMainItemStyle"
+            android:background="@drawable/selector_tab_up"
+            android:clickable="true">
+
+            <ImageView
+                android:layout_width="@dimen/view_40dp"
+                android:layout_height="@dimen/view_40dp"
+                android:src="@drawable/bxfile_file_video"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/view_10dp"
+                android:text="视频"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bxfile_arrow_right_normal"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
