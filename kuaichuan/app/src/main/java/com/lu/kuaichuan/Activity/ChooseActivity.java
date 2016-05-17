@@ -179,9 +179,10 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         mViewPager = (ViewPager)findViewById(R.id.viewpager);
         mTabLayout = (TabLayout) findViewById(R.id.tabs);
         List<String> titles = new ArrayList<>();
+
+        titles.add("连接");
         titles.add("图库");
-        titles.add("音乐");
-        titles.add("视频");
+        titles.add("影音");
         titles.add("应用");
         titles.add("文档");
         titles.add("其他");

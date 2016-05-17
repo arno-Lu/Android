@@ -1,12 +1,16 @@
 package com.lu.kuaichuan.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Environment;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.apache.ftpserver.FtpServer;
@@ -31,6 +35,7 @@ import lu.com.kuaichuan.R;
 public class FtpActivity extends AppCompatActivity {
 
     private FtpServer mFtpServer;
+    private Button WiFiButton;
     private String ftpConfigDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ftpConfig/";
 
     @Override
@@ -38,6 +43,19 @@ public class FtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_ftp);
+
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
+        toolbar.setTitle(R.string.pc_connect);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.titleColor));
+
+        Button WiFiButton = (Button) findViewById(R.id.wifi_connect_id);
+
+        WiFiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+            }
+        });
 
         TextView tv = (TextView) findViewById(R.id.tvText);
         String info = "ftp://" + getLocalIpAddress() + ":2221\n";

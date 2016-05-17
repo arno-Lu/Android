@@ -6,7 +6,7 @@
     <string name="user_name">用户名</string>
     <string name="setting">设置</string>
     <string name="filter_size">最小文件大小</string>
-    <string name="pc_connect">电脑互联</string>
+    <string name="pc_connect">PC互传</string>
     <string name="cancel">取消</string>
     <!-- 本地文件系统 -->
     <string name="localeFile">本地文件</string>
