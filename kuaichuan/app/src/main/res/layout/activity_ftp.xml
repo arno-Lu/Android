@@ -22,6 +22,7 @@
 
 
 
+
          <Button
            android:id="@+id/wifi_connect_id"
            android:text=" WiFi管理  "
@@ -34,16 +35,39 @@
 
            />
 
-        <TextView
+        <Button
+            android:id="@+id/ap_connect_id"
+            android:text=" 热点模式  "
+            android:layout_marginTop="30dp"
+            android:textSize="15sp"
+            android:layout_above="@id/wifi_connect_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@id/wifi_connect_id"
+            android:background="@drawable/shape_phone"
+
+            />
+
+        <TextView
+            android:id="@+id/wifi_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/ap_connect_id"
             android:layout_marginBottom="@dimen/view_20dp"
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="@dimen/text_20sp"
             android:text="确保手机与电脑处于同一WiFi下:"/>
 
+        <TextView
+            android:id="@+id/ap_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/wifi_title"
+            android:layout_marginBottom="@dimen/view_20dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_20sp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/warning"

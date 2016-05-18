@@ -13,6 +13,7 @@ import android.widget.Button;
 
 
 import com.lu.kuaichuan.Activity.FtpActivity;
+import com.lu.kuaichuan.Activity.WiFiDirectActivity;
 
 import java.io.File;
 
@@ -56,7 +57,12 @@ public class Fragment_connect_mian extends Fragment {
             switch (view.getId()){
 
                 case R.id.phone_connect_id:
+
+                    Intent intent_phone = new Intent(getActivity(), WiFiDirectActivity.class);
+                    getActivity().startActivity(intent_phone);
+
                     break;
+
                 case R.id.pc_connect_id:
 
                     Intent intent_pc = new Intent(getActivity(), FtpActivity.class);

@@ -2,6 +2,8 @@ package com.lu.kuaichuan.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +27,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -36,6 +39,10 @@ public class FtpActivity extends AppCompatActivity {
 
     private FtpServer mFtpServer;
     private Button WiFiButton;
+    private Button ApButton;
+    private TextView ap_name;
+    private TextView wifi_title;
+    private boolean flag=false;
     private String ftpConfigDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ftpConfig/";
 
     @Override
@@ -48,7 +55,22 @@ public class FtpActivity extends AppCompatActivity {
         toolbar.setTitle(R.string.pc_connect);
         toolbar.setTitleTextColor(getResources().getColor(R.color.titleColor));
 
-        Button WiFiButton = (Button) findViewById(R.id.wifi_connect_id);
+        WiFiButton = (Button) findViewById(R.id.wifi_connect_id);
+        ApButton = (Button)findViewById(R.id.ap_connect_id);
+        ap_name = (TextView)findViewById(R.id.ap_name);
+        wifi_title = (TextView)findViewById(R.id.wifi_title);
+
+        ApButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flag=!flag;
+                setWifiApEnabled(flag);
+                if(flag == false){
+                    ap_name.setVisibility(View.GONE);
+                    wifi_title.setText(" 确保手机与电脑处于同一WiFi下：");
+                }
+            }
+        });
 
         WiFiButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +91,33 @@ public class FtpActivity extends AppCompatActivity {
     }
 
 
+    public boolean setWifiApEnabled(boolean enabled) {
+        WifiManager wifiManager = null;
+        wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+        if (enabled) { // disable WiFi in any case
+            //wifi和热点不能同时打开，所以打开热点的时候需要关闭wifi
+            wifiManager.setWifiEnabled(false);
+        }
+        try {
+            //热点的配置类
+            WifiConfiguration apConfig = new WifiConfiguration();
+            //配置热点的名称(可以在名字后面加点随机数什么的)
+            apConfig.SSID = "本机";
+            //配置热点的密码
+            apConfig.preSharedKey="12122112";
+            //通过反射调用设置热点
+            Method method = wifiManager.getClass().getMethod(
+                    "setWifiApEnabled", WifiConfiguration.class, Boolean.TYPE);
+
+            ap_name.setText(apConfig.SSID);
+            ap_name.setVisibility(View.VISIBLE);
+            wifi_title.setText(" 连接电脑至本机热点：");
+            //返回热点打开状态
+            return (Boolean) method.invoke(wifiManager, apConfig, enabled);
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     public String getLocalIpAddress() {
         String strIP = null;
