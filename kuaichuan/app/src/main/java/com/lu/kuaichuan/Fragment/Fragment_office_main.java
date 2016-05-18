@@ -1,5 +1,6 @@
 package com.lu.kuaichuan.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import lu.com.kuaichuan.R;
 
@@ -14,6 +16,7 @@ import lu.com.kuaichuan.R;
  * Created by Lu on 2016/5/15.
  */
 public class Fragment_office_main extends Fragment{
+
 
     @Override
     public void onCreate(Bundle saveInstanceState){
@@ -38,11 +41,13 @@ public class Fragment_office_main extends Fragment{
         View xls = getActivity().findViewById(R.id.localefile_xls);
         View pdf = getActivity().findViewById(R.id.localefile_pdf);
         View txt = getActivity().findViewById(R.id.localefile_txt);
+
         doc.setOnClickListener(new ItemClickListener());
         ppt.setOnClickListener(new ItemClickListener());
         xls.setOnClickListener(new ItemClickListener());
         pdf.setOnClickListener(new ItemClickListener());
         txt.setOnClickListener(new ItemClickListener());
+
 
     }
 

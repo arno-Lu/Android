@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.p2p.WifiP2pInfo;
 import android.support.annotation.BoolRes;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -31,6 +32,9 @@ import com.lu.kuaichuan.Fragment.Fragment_apk;
 import com.lu.kuaichuan.Fragment.Fragment_office_main;
 import com.lu.kuaichuan.Fragment.Fragment_other_main;
 import com.lu.kuaichuan.Fragment.Fragment_pic;
+import com.lu.kuaichuan.WiFiDirect.FileTransferService;
+
+import org.w3c.dom.ls.LSException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +55,9 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     private TextView localfile_bottom_tv;
 
     FileManager bfm = FileManager.getInstance();
+    List<TFile> choosedFiles = bfm.getChoosedFiles();
 
+    private WifiP2pInfo info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,16 +87,20 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         super.onDestroy();
         unregisterReceiver(cntChangeBroadcastReceiver);
     }
+
     @Override
     public void onClick(View view){
         switch (view.getId()){
 
             case R.id.clear_bottom_btn:
-                List<TFile> choosedFiles = bfm.getChoosedFiles();
                 choosedFiles.clear();
                 local_file_bottom.setVisibility(View.GONE);
                 break;
             case R.id.localefile_bottom_btn:
+
+                sendChooseFiles();
+                choosedFiles.clear();
+                local_file_bottom.setVisibility(View.GONE);
                 break;
             default:
                 break;
@@ -115,6 +125,22 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         }
     };
 
+
+    private void sendChooseFiles(){
+
+        List<TFile> choosedFiles = bfm.getChoosedFiles();
+        for(TFile file : choosedFiles){
+
+            Intent serviceIntent = new Intent(ChooseActivity.this, FileTransferService.class);//注册客户端传文件的意图
+            serviceIntent.setAction(FileTransferService.ACTION_SEND_FILE);
+            serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH, file.getFileUrl());
+            serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS,
+                    info.groupOwnerAddress.getHostAddress());
+            serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT, 8988);
+            ChooseActivity.this.startService(serviceIntent);
+        }
+
+    }
 
     private void initToolBar(){
 

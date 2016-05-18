@@ -31,7 +31,10 @@
             </intent-filter>
         </activity>
         <activity android:name="com.lu.kuaichuan.Activity.FtpActivity" />
-        <activity android:name="com.lu.kuaichuan.Activity.WiFiDirectActivity"></activity>
+        <activity android:name="com.lu.kuaichuan.Activity.WiFiDirectActivity"/>
+        <activity android:name="org.openintents.filemanager.util.FileManagerActivity"/>
+
+
     </application>
 
 </manifest>

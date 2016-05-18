@@ -1,5 +1,6 @@
 package com.lu.kuaichuan.Fragment;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -10,6 +11,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.lu.kuaichuan.util.FileUtils;
@@ -55,7 +57,15 @@ public class Fragment_other_main extends Fragment{
         extSdcard.setOnClickListener(new PathClickListener());
         zip.setOnClickListener(new PathClickListener());
         rar.setOnClickListener(new PathClickListener());
-
+        Button fileButton =(Button)getActivity().findViewById(R.id.explorer);
+        fileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("testApp");
+            //    intent.setComponent(new ComponentName("org.openintents.filemanagert", "org.openintents.filemanager.FileManagerActivity"));
+                startActivity(intent);
+            }
+        });
 
     }
 

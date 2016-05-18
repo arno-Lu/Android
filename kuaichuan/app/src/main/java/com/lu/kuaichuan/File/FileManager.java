@@ -1,11 +1,14 @@
 package com.lu.kuaichuan.File;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.lu.kuaichuan.Activity.ChooseActivity;
 import com.lu.kuaichuan.File.TFile.MimeType;
+import com.lu.kuaichuan.WiFiDirect.FileTransferService;
 import com.lu.kuaichuan.util.FileUtils;
 
 import java.util.ArrayList;

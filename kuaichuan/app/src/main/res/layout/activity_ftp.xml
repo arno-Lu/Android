@@ -14,14 +14,15 @@
         android:background="@color/colorPrimaryDark"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/id_swip_ftp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/view_10dp">
-
-
-
 
          <Button
            android:id="@+id/wifi_connect_id"
@@ -79,11 +80,19 @@
             android:textStyle="bold"
             android:textSize="@dimen/text_20sp"
             android:text="请通过我的电脑访问该地址:"/>
+        <TextView
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/warning"
+            android:gravity="center"
+            android:textSize="15sp"
+
+            android:text="下拉刷新地址:"/>
 
        <TextView
           android:layout_width="match_parent"
-
-          android:layout_below="@id/warning"
+          android:layout_below="@id/update"
            android:layout_height="@dimen/view_40dp"
            android:layout_margin="10dp"
            android:layout_marginTop="@dimen/view_20dp"
@@ -96,6 +105,6 @@
 
 
     </RelativeLayout>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

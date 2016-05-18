@@ -18,9 +18,18 @@
             android:orientation="vertical"
             android:padding="@dimen/view_10dp">
 
+            <Button
+                android:id="@+id/explorer"
+                android:text=" 文件管理  "
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_phone"
+                />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/view_20dp"
                 android:textStyle="bold"
                 android:text="路径查找"/>
             <LinearLayout

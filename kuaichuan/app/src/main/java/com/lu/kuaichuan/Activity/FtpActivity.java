@@ -1,11 +1,14 @@
 package com.lu.kuaichuan.Activity;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Environment;
 import android.provider.Settings;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -35,13 +38,15 @@ import java.util.Enumeration;
 
 import lu.com.kuaichuan.R;
 
-public class FtpActivity extends AppCompatActivity {
+public class FtpActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
 
     private FtpServer mFtpServer;
     private Button WiFiButton;
     private Button ApButton;
     private TextView ap_name;
     private TextView wifi_title;
+    private TextView tv;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private boolean flag=false;
     private String ftpConfigDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/ftpConfig/";
 
@@ -51,6 +56,7 @@ public class FtpActivity extends AppCompatActivity {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_ftp);
 
+
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
         toolbar.setTitle(R.string.pc_connect);
         toolbar.setTitleTextColor(getResources().getColor(R.color.titleColor));
@@ -59,6 +65,9 @@ public class FtpActivity extends AppCompatActivity {
         ApButton = (Button)findViewById(R.id.ap_connect_id);
         ap_name = (TextView)findViewById(R.id.ap_name);
         wifi_title = (TextView)findViewById(R.id.wifi_title);
+        tv = (TextView) findViewById(R.id.tvText);
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.id_swip_ftp);
+
 
         ApButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +77,8 @@ public class FtpActivity extends AppCompatActivity {
                 if(flag == false){
                     ap_name.setVisibility(View.GONE);
                     wifi_title.setText(" 确保手机与电脑处于同一WiFi下：");
+                    String info = "ftp://" + getLocalIpAddress() + ":2221\n";
+                    tv.setText(info);
                 }
             }
         });
@@ -78,8 +89,8 @@ public class FtpActivity extends AppCompatActivity {
                 startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
             }
         });
+        swipeRefreshLayout.setOnRefreshListener(this);
 
-        TextView tv = (TextView) findViewById(R.id.tvText);
         String info = "ftp://" + getLocalIpAddress() + ":2221\n";
         tv.setText(info);
 
@@ -90,6 +101,13 @@ public class FtpActivity extends AppCompatActivity {
         Config1();
     }
 
+    public void onRefresh(){
+
+        String info = "ftp://" + getLocalIpAddress() + ":2221\n";
+        tv.setText(info);
+
+        swipeRefreshLayout.setRefreshing(false);
+    }
 
     public boolean setWifiApEnabled(boolean enabled) {
         WifiManager wifiManager = null;
@@ -102,16 +120,16 @@ public class FtpActivity extends AppCompatActivity {
             //热点的配置类
             WifiConfiguration apConfig = new WifiConfiguration();
             //配置热点的名称(可以在名字后面加点随机数什么的)
-            apConfig.SSID = "本机";
+            apConfig.SSID = "用户名";
             //配置热点的密码
-            apConfig.preSharedKey="12122112";
             //通过反射调用设置热点
             Method method = wifiManager.getClass().getMethod(
                     "setWifiApEnabled", WifiConfiguration.class, Boolean.TYPE);
 
-            ap_name.setText(apConfig.SSID);
+            ap_name.setText("用户名");
             ap_name.setVisibility(View.VISIBLE);
             wifi_title.setText(" 连接电脑至本机热点：");
+
             //返回热点打开状态
             return (Boolean) method.invoke(wifiManager, apConfig, enabled);
         } catch (Exception e) {
@@ -252,7 +270,6 @@ public class FtpActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         if (null != mFtpServer) {
             mFtpServer.stop();
             mFtpServer = null;
