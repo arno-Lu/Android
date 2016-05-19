@@ -1,6 +1,7 @@
 package com.lu.kuaichuan.File;
 
 import android.app.Application;
+import android.net.wifi.p2p.WifiP2pInfo;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,5 +18,15 @@ public class FEApplication extends Application{
         if (!es.isShutdown()) {
             es.execute(r);
         }
+    }
+
+    private String user_name;
+    private WifiP2pInfo Info;
+
+    public WifiP2pInfo getInfo(){
+        return this.Info;
+    }
+    public void setInfo(WifiP2pInfo info){
+        this.Info = info;
     }
 }

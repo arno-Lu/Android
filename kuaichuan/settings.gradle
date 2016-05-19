@@ -1,1 +1,1 @@
-include ':app', ':app_file_manager'
+include ':app'

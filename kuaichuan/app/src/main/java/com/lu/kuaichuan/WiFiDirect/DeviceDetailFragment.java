@@ -2,9 +2,12 @@ package com.lu.kuaichuan.WiFiDirect;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
@@ -13,13 +16,18 @@ import android.net.wifi.p2p.WifiP2pManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.lu.kuaichuan.Activity.ChooseActivity;
 import com.lu.kuaichuan.Activity.WiFiDirectActivity;
+import com.lu.kuaichuan.File.FEApplication;
+import com.lu.kuaichuan.File.FileManager;
+import com.lu.kuaichuan.File.TFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,6 +36,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
+import java.util.List;
 
 import lu.com.kuaichuan.R;
 
@@ -39,12 +49,14 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
     protected static final int CHOOSE_FILE_RESULT_CODE = 20;
     private View mContentView = null;
     private WifiP2pDevice device;
-    private WifiP2pInfo info;
+    public WifiP2pInfo info;
     ProgressDialog progressDialog = null;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
     }
 
     @Override
@@ -61,8 +73,8 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
                 if (progressDialog != null && progressDialog.isShowing()) {
                     progressDialog.dismiss();
                 }
-                progressDialog = ProgressDialog.show(getActivity(), "Press back to cancel",
-                        "Connecting to :" + device.deviceAddress, true, true
+                progressDialog = ProgressDialog.show(getActivity(), "返回",
+                        "连接 :" + device.deviceAddress, true, true
 //                        new DialogInterface.OnCancelListener() {
 //
 //                            @Override
@@ -85,47 +97,31 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
                     }
                 });
 
-        mContentView.findViewById(R.id.btn_start_client).setOnClickListener(
-                new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // Allow user to pick an image from Gallery or other
-                        // registered apps
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                        intent.setType("image/*");
-                        startActivityForResult(intent, CHOOSE_FILE_RESULT_CODE);
-                    }
-                });
 
         return mContentView;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        // User has picked an image. Transfer it to group owner i.e peer using
-        // FileTransferService.
-        Uri uri = data.getData();
-        TextView statusText = (TextView) mContentView.findViewById(R.id.status_text);
-        statusText.setText("Sending: " + uri);
-        Log.d(WiFiDirectActivity.TAG, "Intent----------- " + uri);
-        Intent serviceIntent = new Intent(getActivity(), FileTransferService.class);
-        serviceIntent.setAction(FileTransferService.ACTION_SEND_FILE);
-        serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH, uri.toString());
-        serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS,
-                info.groupOwnerAddress.getHostAddress());
-        serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT, 8988);
-        getActivity().startService(serviceIntent);
-    }
+
+
+
+
+
 
     @Override
+
     public void onConnectionInfoAvailable(final WifiP2pInfo info) {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
         this.info = info;
+
+        Intent intent = new Intent("send");
+        intent.putExtra("info",info.groupOwnerAddress.getHostAddress());
+        getActivity().sendBroadcast(intent);
+        Log.d("TAG", "onConnectionInfoAvailable: "+ info);
         this.getView().setVisibility(View.VISIBLE);
+
 
         // The owner IP is now known.
         TextView view = (TextView) mContentView.findViewById(R.id.group_owner);
@@ -146,14 +142,13 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
         } else if (info.groupFormed) {
             // The other device acts as the client. In this case, we enable the
             // get file button.
-            mContentView.findViewById(R.id.btn_start_client).setVisibility(View.VISIBLE);
-            ((TextView) mContentView.findViewById(R.id.status_text)).setText(getResources()
-                    .getString(R.string.client_text));
+
         }
 
         // hide the connect button
         mContentView.findViewById(R.id.btn_connect).setVisibility(View.GONE);
     }
+
 
     /**
      * Updates the UI with device data
@@ -183,7 +178,6 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
         view.setText(R.string.empty);
         view = (TextView) mContentView.findViewById(R.id.status_text);
         view.setText(R.string.empty);
-        mContentView.findViewById(R.id.btn_start_client).setVisibility(View.GONE);
         this.getView().setVisibility(View.GONE);
     }
 
@@ -241,10 +235,6 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
         protected void onPostExecute(String result) {
             if (result != null) {
                 statusText.setText("File copied - " + result);
-                Intent intent = new Intent();
-                intent.setAction(android.content.Intent.ACTION_VIEW);
-                intent.setDataAndType(Uri.parse("file://" + result), "image/*");
-                context.startActivity(intent);
             }
 
         }

@@ -24,12 +24,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/disconnect_peer_button" />
-            <Button
-                android:id="@+id/btn_start_client"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/get_file_button"
-                 />
         </LinearLayout>
         <TextView
             android:id="@+id/device_address"
@@ -55,13 +49,13 @@
         android:layout_gravity="bottom"
         android:layout_height="37dp"
         android:layout_marginBottom="3dp"
-        android:background="@android:color/background_dark">
+        android:background="@android:color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:id="@+id/status_text">
         </TextView>
     </LinearLayout>

@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.lu.kuaichuan.Activity.WiFiDirectActivity;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,7 +46,7 @@ public class FileTransferService extends IntentService {
         Context context = getApplicationContext();
         if (intent.getAction().equals(ACTION_SEND_FILE)) {
             String fileUri = intent.getExtras().getString(EXTRAS_FILE_PATH);
-            String host = intent.getExtras().getString(EXTRAS_GROUP_OWNER_ADDRESS);
+            String host = "192.168.49.1";//intent.getExtras().getString(EXTRAS_GROUP_OWNER_ADDRESS);
             Socket socket = new Socket();
             int port = intent.getExtras().getInt(EXTRAS_GROUP_OWNER_PORT);
 
@@ -56,10 +57,10 @@ public class FileTransferService extends IntentService {
 
                 Log.d(WiFiDirectActivity.TAG, "Client socket - " + socket.isConnected());
                 OutputStream stream = socket.getOutputStream();
-                ContentResolver cr = context.getContentResolver();
+              //  ContentResolver cr = context.getContentResolver();
                 InputStream is = null;
                 try {
-                    is = cr.openInputStream(Uri.parse(fileUri));
+                    is = new FileInputStream(fileUri);
                 } catch (FileNotFoundException e) {
                     Log.d(WiFiDirectActivity.TAG, e.toString());
                 }
