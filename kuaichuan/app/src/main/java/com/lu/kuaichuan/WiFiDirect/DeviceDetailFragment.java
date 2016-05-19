@@ -98,6 +98,8 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
                 });
 
 
+
+
         return mContentView;
     }
 
@@ -119,7 +121,8 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
         Intent intent = new Intent("send");
         intent.putExtra("info",info.groupOwnerAddress.getHostAddress());
         getActivity().sendBroadcast(intent);
-        Log.d("TAG", "onConnectionInfoAvailable: "+ info);
+        Log.d("TAG", "onConnectionInfoAvailable: "+ intent.getStringExtra("info"));
+
         this.getView().setVisibility(View.VISIBLE);
 
 

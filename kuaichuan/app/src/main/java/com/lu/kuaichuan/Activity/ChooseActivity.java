@@ -58,9 +58,9 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     private Button send_button;
     private Button clear_button;
     private TextView localfile_bottom_tv;
-    private String address;
+    public String address;
 
-
+    WifiP2pInfo INFO;
     FileManager bfm = FileManager.getInstance();
     List<TFile> choosedFiles = bfm.getChoosedFiles();
 
@@ -81,7 +81,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         registerReceiver(cntChangeBroadcastReceiver,intentFilter);
 
         IntentFilter intentFilter_address = new IntentFilter();
-        intentFilter.addAction("send");
+        intentFilter_address.addAction("send");
         registerReceiver(addresseBroadcastReceiver,intentFilter_address);
 
 
@@ -89,15 +89,24 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         initNavigationDrawer();
         initViewPager();
 
+        if (savedInstanceState != null && savedInstanceState.getString("address") != null){
+            address = savedInstanceState.getString("address");
+        }
+
 
     }
 
+    @Override   //通过重写onSaveInstanceState，防止address被回收
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("address",address);
+        super.onSaveInstanceState(outState);
+    }
 
-
-    @Override
+        @Override
     public void onDestroy(){
         super.onDestroy();
         unregisterReceiver(cntChangeBroadcastReceiver);
+        unregisterReceiver(addresseBroadcastReceiver);
     }
 
     @Override
@@ -112,13 +121,12 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
                List<TFile> choosedFiles = bfm.getChoosedFiles();
                 for(TFile file : choosedFiles) {
 
-                    Log.d("TAG", "onReceive: ");
                     Intent serviceIntent = new Intent(ChooseActivity.this, FileTransferService.class);//注册客户端传文件的意图
                     serviceIntent.setAction(FileTransferService.ACTION_SEND_FILE);
                     serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH, file.getFilePath());
                     serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS, address);
 
-                   serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT, 8988);
+                    serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT, 8988);
                     startService(serviceIntent);
                 }
                choosedFiles.clear();
@@ -154,6 +162,10 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
             Log.d("TAG", "onReceive123: " +address);
         }
     };
+
+    public  String getAddress(){
+        return address;
+    }
 
 
 
