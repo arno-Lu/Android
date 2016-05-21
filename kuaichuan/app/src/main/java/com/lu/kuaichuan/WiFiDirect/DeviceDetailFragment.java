@@ -29,8 +29,6 @@ import com.lu.kuaichuan.File.FEApplication;
 import com.lu.kuaichuan.File.FileManager;
 import com.lu.kuaichuan.File.TFile;
 
-import java.io.BufferedInputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -211,23 +209,14 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
                 Log.d(WiFiDirectActivity.TAG, "Server: Socket opened");
                 Socket client = serverSocket.accept();
                 Log.d(WiFiDirectActivity.TAG, "Server: connection done");
-                String file_name =null;
                 //传输过程
-                try {
-                    BufferedInputStream inputStream = new BufferedInputStream(client.getInputStream());
-                    byte[] info = new byte[256];
-                    inputStream.read(info);
-                     file_name = new String(info).trim();
-                }catch (EOFException e){
-                    e.printStackTrace();
-                }
                 final File f = new File(Environment.getExternalStorageDirectory() + "/"
-                        + context.getPackageName() + "/"+file_name);
+                        + context.getPackageName() + "/wifip2pshared-" + System.currentTimeMillis()
+                        + ".jpg");
 
                 File dirs = new File(f.getParent());
                 if (!dirs.exists())
                     dirs.mkdirs();
-
                 f.createNewFile();
 
                 Log.d(WiFiDirectActivity.TAG, "server: copying files " + f.toString());

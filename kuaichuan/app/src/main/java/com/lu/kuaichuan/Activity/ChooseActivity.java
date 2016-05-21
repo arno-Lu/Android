@@ -125,7 +125,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
                     serviceIntent.setAction(FileTransferService.ACTION_SEND_FILE);
                     serviceIntent.putExtra(FileTransferService.EXTRAS_FILE_PATH, file.getFilePath());
                     serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_ADDRESS, address);
-                    serviceIntent.putExtra(FileTransferService.FILE_NAME,file.getFileName());
+
                     serviceIntent.putExtra(FileTransferService.EXTRAS_GROUP_OWNER_PORT, 8988);
                     startService(serviceIntent);
                 }
