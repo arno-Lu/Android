@@ -4,6 +4,7 @@ import android.app.IntentService;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 
@@ -28,6 +29,7 @@ import java.util.Arrays;
  * Created by Lu on 2016/5/17.
  */
 //文件信息和文件合并后在写入socket输出流,先确定文件类型，再写入相应文件（需要指定大小？）
+    //http://www.cnblogs.com/x-man/archive/2012/05/09/2491516.html
 public class FileTransferService extends IntentService {
 
     private static final int SOCKET_TIMEOUT = 5000;
@@ -44,6 +46,10 @@ public class FileTransferService extends IntentService {
         super("FileTransferService");
     }
 
+    Socket  socket;
+    FileInputStream FS ;
+    ByteArrayInputStream INFO;
+
     /*
      * (non-Javadoc)
      * @see android.app.IntentService#onHandleIntent(android.content.Intent)
@@ -51,41 +57,46 @@ public class FileTransferService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        Context context = getApplicationContext();
+
         if (intent.getAction().equals(ACTION_SEND_FILE)) {
             String fileUri = intent.getExtras().getString(EXTRAS_FILE_PATH);
             String host = intent.getExtras().getString(EXTRAS_GROUP_OWNER_ADDRESS);
 
+
             String name = intent.getExtras().getString(FILE_NAME);
             byte[] name_byte = name.getBytes();
-            byte[] info = Arrays.copyOf(name_byte,256);
-            ByteArrayInputStream INFO = new ByteArrayInputStream(info); //信息流
-
-            File file = new File(fileUri);
-            FileInputStream FS = null;
-            try{
-
-                 FS = new FileInputStream(file);  //文件名
-
-            }catch (FileNotFoundException e){
-                Log.d(WiFiDirectActivity.TAG, e.toString());
-            }
-
-            SequenceInputStream  all = new SequenceInputStream(INFO,FS); //合并流
-
-            Socket socket = new Socket();
-            int port = intent.getExtras().getInt(EXTRAS_GROUP_OWNER_PORT);
-
+            byte[] info = Arrays.copyOf(name_byte, 256);
             try {
+
+                 INFO = new ByteArrayInputStream(info); //信息流
+
+                File file = new File(fileUri);
+
+
+                try {
+                       FS = new FileInputStream(file);  //文件名
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                SequenceInputStream all = new SequenceInputStream(INFO, FS); //合并流
+
+
+                socket = new Socket();
+                int port = intent.getExtras().getInt(EXTRAS_GROUP_OWNER_PORT);
+
                 Log.d(WiFiDirectActivity.TAG, "Opening client socket - ");
                 socket.bind(null);
                 socket.connect((new InetSocketAddress(host, port)), SOCKET_TIMEOUT);
 
                 Log.d(WiFiDirectActivity.TAG, "Client socket - " + socket.isConnected());
                 BufferedOutputStream stream = new BufferedOutputStream(socket.getOutputStream());
-              //  ContentResolver cr = context.getContentResolver();
+                //  ContentResolver cr = context.getContentResolver();
 
                 DeviceDetailFragment.copyFile(all, stream);
+
+                FS.close();
+                INFO.close();
                 Log.d(WiFiDirectActivity.TAG, "Client: Data written");
             } catch (IOException e) {
                 Log.e(WiFiDirectActivity.TAG, e.getMessage());
@@ -101,7 +112,7 @@ public class FileTransferService extends IntentService {
                     }
                 }
             }
-
         }
     }
+
 }

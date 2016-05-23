@@ -58,6 +58,7 @@ public class TFile implements Comparable<TFile>,Serializable{
     private FileState fileState;//文件状态
     private Drawable drawable;
 
+
     public FileState getFileState() {
         return fileState;
     }
@@ -92,6 +93,7 @@ public class TFile implements Comparable<TFile>,Serializable{
         return lastModifyTimeStr;
     }
     public  Drawable getImage(){return  drawable;}
+
 
 
 
@@ -160,7 +162,7 @@ public class TFile implements Comparable<TFile>,Serializable{
 
         public appBuild(PackageInfo packageInfo, PackageManager mPackageManager){
             bxFile =new TFile();
-            bxFile.fileName =getApplicationName(packageInfo.packageName,mPackageManager);
+            bxFile.fileName =getApplicationName(packageInfo.packageName,mPackageManager)+".apk";
             bxFile.drawable =packageInfo.applicationInfo.loadIcon(mPackageManager);
             bxFile.filePath=packageInfo.applicationInfo.sourceDir;
             apkFile = new File(packageInfo.applicationInfo.sourceDir);

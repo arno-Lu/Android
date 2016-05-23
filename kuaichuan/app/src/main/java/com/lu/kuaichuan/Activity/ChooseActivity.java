@@ -58,9 +58,10 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     private Button send_button;
     private Button clear_button;
     private TextView localfile_bottom_tv;
-    public String address;
+    private String address;
+    private boolean status;
+    private Toolbar toolbar;
 
-    WifiP2pInfo INFO;
     FileManager bfm = FileManager.getInstance();
     List<TFile> choosedFiles = bfm.getChoosedFiles();
 
@@ -70,6 +71,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_choose);
+         toolbar = (Toolbar) findViewById(R.id.toolBar);
 
         local_file_bottom = findViewById(R.id.localefile_bottom);
         send_button = (Button)findViewById(R.id.localefile_bottom_btn);
@@ -84,14 +86,20 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         intentFilter_address.addAction("send");
         registerReceiver(addresseBroadcastReceiver,intentFilter_address);
 
+        IntentFilter intentFilter_status = new IntentFilter();
+        intentFilter_status.addAction("wifi_status");
+        registerReceiver(statusBroadcastReceiver,intentFilter_status);
 
         initToolBar();
         initNavigationDrawer();
         initViewPager();
 
-        if (savedInstanceState != null && savedInstanceState.getString("address") != null){
+
+        if (savedInstanceState != null &&savedInstanceState.getString("address") != null){
             address = savedInstanceState.getString("address");
+            status = savedInstanceState.getBoolean("status");
         }
+
 
 
     }
@@ -99,14 +107,16 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     @Override   //通过重写onSaveInstanceState，防止address被回收
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString("address",address);
+        outState.putBoolean("status",status);
         super.onSaveInstanceState(outState);
     }
 
         @Override
     public void onDestroy(){
         super.onDestroy();
-        unregisterReceiver(cntChangeBroadcastReceiver);
-        unregisterReceiver(addresseBroadcastReceiver);
+            unregisterReceiver(cntChangeBroadcastReceiver);
+            unregisterReceiver(addresseBroadcastReceiver);
+            unregisterReceiver(statusBroadcastReceiver);
     }
 
     @Override
@@ -163,16 +173,27 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         }
     };
 
-    public  String getAddress(){
-        return address;
-    }
+   private BroadcastReceiver statusBroadcastReceiver = new BroadcastReceiver() {
+
+       @Override
+       public void onReceive(Context context, Intent intent) {
+            status = intent.getBooleanExtra("status",true);
+
+           if(status==false) {
+               Toast.makeText(context,"未连接",Toast.LENGTH_LONG).show();
+           }else {
+             //  Toast.makeText(context," ！",Toast.LENGTH_LONG).show();
+           }
+
+       }
+   };
 
 
 
 
     private void initToolBar(){
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
+
 
         toolbar.setNavigationIcon(R.mipmap.ic_drawer_home);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -181,7 +202,9 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
                mDrawer.openDrawer(Gravity.LEFT);
             }
         });
-        toolbar.setTitle(R.string.disconnect);
+
+            toolbar.setTitle("选择文件");
+
         toolbar.setTitleTextColor(getResources().getColor(R.color.titleColor));
         toolbar.inflateMenu(R.menu.toolbar_menu);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener(){

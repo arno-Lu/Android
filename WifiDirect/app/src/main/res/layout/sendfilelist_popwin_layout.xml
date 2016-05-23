@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/sendfilelist_popwin_bg">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:singleLine="true"
+            android:text="Title"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+        <View
+            android:id="@+id/view"
+            android:layout_below="@id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/gradient_bg"/>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/view2"
+            android:layout_below="@id/view"
+            android:divider="#5fff"
+            android:dividerHeight="1px"></ListView>
+
+
+        <LinearLayout
+            android:id="@+id/lin_fun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/img_ok"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/sendfilelist_popwin_but_bg"
+                android:padding="15dp"
+                android:src="@drawable/ok" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="1dp" />
+
+            <ImageView
+                android:id="@+id/img_cancel"
+
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/sendfilelist_popwin_but_bg"
+                android:padding="15dp"
+                android:src="@drawable/cancel" />
+        </LinearLayout>
+        <View
+            android:id="@+id/view2"
+            android:layout_above="@id/lin_fun"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/gradient_bg"/>
+    </RelativeLayout>
+
+</RelativeLayout>

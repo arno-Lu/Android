@@ -40,6 +40,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import lu.com.kuaichuan.R;
 
@@ -100,16 +102,8 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
                 });
 
 
-
-
         return mContentView;
     }
-
-
-
-
-
-
 
 
     @Override
@@ -121,9 +115,9 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
         this.info = info;
 
         Intent intent = new Intent("send");
-        intent.putExtra("info",info.groupOwnerAddress.getHostAddress());
+        intent.putExtra("info", info.groupOwnerAddress.getHostAddress());
         getActivity().sendBroadcast(intent);
-        Log.d("TAG", "onConnectionInfoAvailable: "+ intent.getStringExtra("info"));
+        Log.d("TAG", "onConnectionInfoAvailable: " + intent.getStringExtra("info"));
 
         this.getView().setVisibility(View.VISIBLE);
 
@@ -206,23 +200,25 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
 
         @Override
         protected String doInBackground(Void... params) {
+
             try {
-                ServerSocket serverSocket = new ServerSocket(8988);
+
+                  ServerSocket serverSocket = new ServerSocket(8988);
+
                 Log.d(WiFiDirectActivity.TAG, "Server: Socket opened");
                 Socket client = serverSocket.accept();
                 Log.d(WiFiDirectActivity.TAG, "Server: connection done");
-                String file_name =null;
+
+                String file_name = null;
                 //传输过程
-                try {
-                    BufferedInputStream inputStream = new BufferedInputStream(client.getInputStream());
+
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(client.getInputStream());
                     byte[] info = new byte[256];
-                    inputStream.read(info);
-                     file_name = new String(info).trim();
-                }catch (EOFException e){
-                    e.printStackTrace();
-                }
+                    bufferedInputStream.read(info);
+                    file_name = new String(info).trim();
+
                 final File f = new File(Environment.getExternalStorageDirectory() + "/"
-                        + context.getPackageName() + "/"+file_name);
+                        + context.getPackageName() + "/" + file_name);
 
                 File dirs = new File(f.getParent());
                 if (!dirs.exists())
@@ -233,7 +229,11 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
                 Log.d(WiFiDirectActivity.TAG, "server: copying files " + f.toString());
                 InputStream inputstream = client.getInputStream();
                 copyFile(inputstream, new FileOutputStream(f));
-                serverSocket.close();
+
+                  client.close();
+                  serverSocket.close();
+                  inputstream.close();
+                  bufferedInputStream.close();
                 return f.getAbsolutePath();
             } catch (IOException e) {
                 Log.e(WiFiDirectActivity.TAG, e.getMessage());
@@ -280,5 +280,4 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
         }
         return true;
     }
-
 }

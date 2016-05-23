@@ -1,0 +1,79 @@
+<resources>
+    <string name="fragment_title_application">应用</string>
+    <string name="pc_connect">电脑互传</string>
+    <string name="fragment_title_connect">连接</string>
+    <string name="fragment_title_music">音乐</string>
+    <string name="fragment_title_movie">电影</string>
+    <string name="fragment_title_fileExplore">浏览</string>
+    <string name="fragment_title_download">下载</string>
+    <string name="app_name">WifiDirect</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+    <string name="action_edit">Edit</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="no_file">无文件</string>
+    <string name="empty"></string>
+    <string name="sendFile">发送文件</string>
+    <string name="add_to_sendfilelist_erorr">文件已在发送列表</string>
+    <string name="clear_sendfilelist_alert_title">提示</string>
+    <string name="clear_sendfilelist_alert_content">是否清空发送列表?</string>
+    <string name="clear_sendfilelist_alert_button_sure">清空</string>
+    <string name="clear_sendfilelist_alert_button_cancel">算了</string>
+    <string name="delete_sendfilelist_popwin_title">移除要发送的文件</string>
+    <string name="refresh_music_list">刷新</string>
+    <string name="gain_permission_error">应用获取权限出错</string>
+    <string name="inner_sdcard">内置SD卡</string>
+    <string name="external_sdcard">外部SD卡</string>
+    <string name="received_file_dir">收到的文件</string>
+    <string name="root_dir">根目录</string>
+    <string name="home_dir">家目录</string>
+    <string name="installed_apps">已安装应用</string>
+    <string name="searching_hit">正在搜索设备,请在另外一台手机上进入此界面搜索</string>
+    <string name="connecting_device">正在连接设备</string>
+    <string name="connect_successed">连接设备成功</string>
+    <string name="connect_failed">连接设备失败</string>
+    <string name="disconnected_device">连接已断开</string>
+    <string name="server">服务端</string>
+    <string name="client">客户端</string>
+
+    <string name="type_application">应用</string>
+    <string name="type_music">音乐</string>
+    <string name="type_movie">电影</string>
+    <string name="type_photo">图片</string>
+    <string name="type_other">其他</string>
+
+    <string name="group_failed_task">已失败</string>
+    <string name="group_finished_task">已完成</string>
+    <string name="group_sending_task">发送中</string>
+    <string name="group_recevieing_task">接收中</string>
+    <string name="group_paused_task">已暂停</string>
+
+    <string name="state_transporting">传输中</string>
+    <string name="state_finished">已完成</string>
+    <string name="state_failed">已失败</string>
+    <string name="state_paused">已暂停</string>
+    <string name="state_waiting">等待中</string>
+
+    <string name="menu_open">打开</string>
+    <string name="menu_delete">删除</string>
+    <string name="menu_uninstall">卸载</string>
+    <string name="menu_property">属性</string>
+
+    <string name="package_uninstalled">已卸载</string>
+
+
+    <string name="enable_p2p_button">P2P On/Off</string>
+    <string name="discover_peers_button">Discover</string>
+    <string name="connect_peer_button">Connect</string>
+    <string name="disconnect_peer_button">Disconnect</string>
+    <string name="get_file_button">Launch Gallery</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="client_text">This device will act as a client. Click on Gallery button to pick a local(stored) file</string>
+    <string name="empty_message">No devices found. Turn on P2P and perform discovery from the Action Bar</string>
+    <string name="p2p_off_warning">Enable P2P from action bar button above or system settings</string>
+    <string name="group_owner_text">"Am I the Group Owner? "</string>
+    <string name="label_me">ME</string>
+    <string name="label_peers">PEERS</string>
+</resources>
