@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_office_id"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bind_bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/localefile_doc"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_up"
+                android:onClick="onClick">
+
+                <ImageView
+                    android:layout_width="@dimen/view_40dp"
+                    android:layout_height="@dimen/view_40dp"
+                    android:src="@drawable/bxfile_file_doc"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/view_10dp"
+                    android:text="DOC文档"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/localefile_ppt"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_up"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="@dimen/view_40dp"
+                    android:layout_height="@dimen/view_40dp"
+                    android:src="@drawable/bxfile_file_ppt"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/view_10dp"
+                    android:text="PPT文档"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/localefile_xls"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_up"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="@dimen/view_40dp"
+                    android:layout_height="@dimen/view_40dp"
+                    android:src="@drawable/bxfile_file_xls"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/view_10dp"
+                    android:text="XLS文档"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/localefile_pdf"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_up"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="@dimen/view_40dp"
+                    android:layout_height="@dimen/view_40dp"
+                    android:src="@drawable/bxfile_file_pdf"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/view_10dp"
+                    android:text="PDF文档"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/localefile_txt"
+                style="@style/localeFileMainItemStyle"
+                android:background="@drawable/selector_tab_up"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="@dimen/view_40dp"
+                    android:layout_height="@dimen/view_40dp"
+                    android:src="@drawable/bxfile_file_txt"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/view_10dp"
+                    android:text="TXT文档"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/bxfile_arrow_right_normal"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
