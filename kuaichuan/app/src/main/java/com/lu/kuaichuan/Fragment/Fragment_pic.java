@@ -19,7 +19,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.lu.kuaichuan.File.FEApplication;
+
 import com.lu.kuaichuan.File.FileManager;
 import com.lu.kuaichuan.File.SyncImageLoader;
 import com.lu.kuaichuan.File.TFile;
@@ -97,8 +97,7 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
         // TODO Auto-generated method stub
         super.onResume();
         if (null == data) {
-            FEApplication bxApp = (FEApplication) getActivity().getApplication();
-            bxApp.execRunnable(new Runnable() {
+            new Thread(){
                 @Override
                 public void run() {
                     // TODO Auto-generated method stub
@@ -109,7 +108,7 @@ public class Fragment_pic extends Fragment implements AdapterView.OnItemClickLis
                         handler.sendEmptyMessage(0);
                 }
 
-            });
+            }.start();
         }else {
             //Fragment 的生命周期在ViewPager中有不同，回用date
             syncImageLoader = new SyncImageLoader();

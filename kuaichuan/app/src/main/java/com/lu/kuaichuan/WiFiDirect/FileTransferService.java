@@ -72,12 +72,7 @@ public class FileTransferService extends IntentService {
 
                 File file = new File(fileUri);
 
-
-                try {
-                       FS = new FileInputStream(file);  //文件名
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
+                FS = new FileInputStream(file);  //文件名
 
                 SequenceInputStream all = new SequenceInputStream(INFO, FS); //合并流
 
@@ -91,10 +86,16 @@ public class FileTransferService extends IntentService {
 
                 Log.d(WiFiDirectActivity.TAG, "Client socket - " + socket.isConnected());
                 BufferedOutputStream stream = new BufferedOutputStream(socket.getOutputStream());
-                //  ContentResolver cr = context.getContentResolver();
 
-                DeviceDetailFragment.copyFile(all, stream);
 
+                byte[] buf = new byte[1024];
+                int len = 0;
+                while((len = all.read(buf))!=-1){
+                    stream.write(buf,0,len);
+                }
+
+                stream.close();
+                all.close();
                 FS.close();
                 INFO.close();
                 Log.d(WiFiDirectActivity.TAG, "Client: Data written");

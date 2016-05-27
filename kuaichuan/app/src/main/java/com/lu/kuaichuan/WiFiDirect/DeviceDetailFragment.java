@@ -30,6 +30,7 @@ import com.lu.kuaichuan.File.FileManager;
 import com.lu.kuaichuan.File.TFile;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -226,19 +227,28 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
 
                 f.createNewFile();
 
+                BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(f));
                 Log.d(WiFiDirectActivity.TAG, "server: copying files " + f.toString());
-                InputStream inputstream = client.getInputStream();
-                copyFile(inputstream, new FileOutputStream(f));
 
-                  client.close();
-                  serverSocket.close();
-                  inputstream.close();
-                  bufferedInputStream.close();
-                return f.getAbsolutePath();
+
+                byte[] buf = new byte[1024];
+                int len = 0;
+                while ((len = bufferedInputStream.read(buf)) != -1) {
+
+                    bos.write(buf, 0, len);
+
+                }
+
+                client.close();
+                serverSocket.close();
+                bos.close();
+                bufferedInputStream.close();
+                return  null;
             } catch (IOException e) {
                 Log.e(WiFiDirectActivity.TAG, e.getMessage());
                 return null;
             }
+
         }
 
         /*
@@ -264,20 +274,5 @@ public class DeviceDetailFragment extends Fragment implements WifiP2pManager.Con
 
     }
 
-    public static boolean copyFile(InputStream inputStream, OutputStream out) {
-        byte buf[] = new byte[1024];
-        int len;
-        try {
-            while ((len = inputStream.read(buf)) != -1) {
-                out.write(buf, 0, len);
 
-            }
-            out.close();
-            inputStream.close();
-        } catch (IOException e) {
-            Log.d(WiFiDirectActivity.TAG, e.toString());
-            return false;
-        }
-        return true;
-    }
 }

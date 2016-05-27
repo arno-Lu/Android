@@ -1,4 +1,4 @@
-<resources>
+﻿<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -34,11 +34,7 @@
         <item name="android:layout_marginRight">@dimen/view_6dp</item>
         <item name="android:textStyle">bold</item>
     </style>
-    <!-- 下一步按钮样式
-    <style name="nextStyle" parent="@style/rightBtnStyle">
-        <item name="android:text">@string/next</item>
-    </style>
-    -->
+
 
     <!-- header样式 -->
     <style name="headerStyle">
