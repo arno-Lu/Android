@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.ckt.io.wifidirect"
+        applicationId "com.lu.kuaichuan.wifidirect"
         minSdkVersion 17
         targetSdkVersion 23
         versionCode 1

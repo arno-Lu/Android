@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ckt.io.wifidirect">
+    package="com.lu.kuaichuan.wifidirect">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -15,13 +15,13 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
-        android:name=".activity.Myapplication"
+        android:name="com.lu.kuaichuan.wifidirect.activity.Myapplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.lu.kuaichuan.wifidirect.activity.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -32,16 +32,17 @@
         </activity>
 
         <provider
-            android:name=".provider.WifiDirectContentProvider"
-            android:authorities="com.ckt.io.wifidirect"
+            android:name="com.lu.kuaichuan.wifidirect.provider.WifiDirectContentProvider"
+            android:authorities="com.lu.kuaichuan.wifidirect"
             android:exported="false" />
 
-        <activity android:name=".activity.FtpActivity" />
-        <activity android:name=".activity.WiFiDirectActivity"/>
-        <activity android:name=".activity.DownloadActivity"/>
+        <activity android:name="com.lu.kuaichuan.wifidirect.activity.FtpActivity" />
+        <activity android:name="com.lu.kuaichuan.wifidirect.activity.WiFiDirectActivity"/>
+        <activity android:name="com.lu.kuaichuan.wifidirect.activity.DownloadActivity"/>
+
 
         <receiver
-            android:name=".fragment.WiFiDirectBroadcastReceiver"
+            android:name="com.lu.kuaichuan.wifidirect.fragment.WiFiDirectBroadcastReceiver"
             android:enabled="true"
             android:exported="true">
         </receiver>

@@ -17,13 +17,13 @@
 
             <fragment
                 android:id="@+id/id_toolbar"
-                android:name="com.ckt.io.wifidirect.fragment.ToolBarFragment"
+                android:name="com.lu.kuaichuan.wifidirect.fragment.ToolBarFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <fragment
                 android:id="@+id/id_content"
-                android:name="com.ckt.io.wifidirect.fragment.ContentFragment"
+                android:name="com.lu.kuaichuan.wifidirect.fragment.ContentFragment"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent" />
         </LinearLayout>
@@ -36,7 +36,7 @@
 
             <fragment
                 android:id="@+id/id_side_drawer"
-                android:name="com.ckt.io.wifidirect.fragment.SideDrawer"
+                android:name="com.lu.kuaichuan.wifidirect.fragment.SideDrawer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
