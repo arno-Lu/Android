@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.lu.kuaichuan"
-        minSdkVersion 15
+        applicationId "com.lu.kuaichuan.wifidirect"
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -17,10 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-}
-
-repositories {
-    jcenter()
 }
 
 dependencies {

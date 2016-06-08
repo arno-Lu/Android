@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+
     <color name="toolBar">#0277BD</color>
     <color name="titleColor">#FAFAFA</color>
     <color name="half_transparent">#33000000</color>
@@ -50,6 +52,7 @@
     <color name="course_detail_title_color">#FF7A00</color>
     <color name="notice_tab_unchoosed">#8f8f8f</color>
     <color name="et_hint_color">#878787</color>
+
 
     <color name="smsbg_color">#e6e6e6</color>
 

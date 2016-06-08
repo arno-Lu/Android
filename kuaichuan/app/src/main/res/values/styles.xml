@@ -1,46 +1,38 @@
-﻿<resources>
+<resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="AppTheme.Base">
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    -
 
-    <style name="ToolBarTheme" parent="AppTheme">
-
-    </style>
-    <!-- Base application theme. -->
-
-
-
-    <!-- 返回按钮样式 -->
-    <style name="backStyle">
-        <item name="android:layout_width">@dimen/title_btn_w</item>
-        <item name="android:layout_height">@dimen/title_btn_h</item>
-        <item name="android:background">@drawable/selector_back</item>
-        <item name="android:layout_marginLeft">@dimen/view_6dp</item>
+    <style name="FullHeightDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
-   
- 
-    <!-- header样式 -->
-    <style name="headerStyle">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">@dimen/view_50dp</item>
-        <item name="android:background">@drawable/title_bg</item>
+    <style name="sendfilelist_popwin_animal_style">
+        <item name="android:windowEnterAnimation">@anim/sendfilelist_popwin_in</item>
+        <item name="android:windowExitAnimation">@anim/sendfilelist_popwin_out</item>
     </style>
 
- 
-    <!-- 标题样式 -->
-    <style name="titleStyle">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/text_20sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textStyle">bold</item>
+    <style name="DownloadProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:maxHeight">50dp</item>
+        <item name="android:minHeight">8dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">
+            @android:drawable/progress_indeterminate_horizontal
+        </item>
+        <item name="android:progressDrawable">@drawable/progressbar</item>
     </style>
+
 
     <!-- 本地文件 itemStyle -->
     <style name="localeFileMainItemStyle">
@@ -50,4 +42,5 @@
         <item name="android:orientation">horizontal</item>
         <item name="android:gravity">center_vertical</item>
     </style>
+
 </resources>

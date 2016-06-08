@@ -33,6 +33,6 @@
         
     </RelativeLayout>
 
-    <include layout="@layout/localfile_bottom" />
+
 
 </LinearLayout>

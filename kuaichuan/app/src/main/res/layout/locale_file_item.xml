@@ -49,12 +49,8 @@
         android:padding="@dimen/view_10dp"
         android:visibility="gone" >
 
-        <CheckBox
-            android:id="@+id/fileCheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/localefile_cb_bg"
-            android:button="@null" />
+
+
 
         <ImageView
             android:id="@+id/fileType"
@@ -95,7 +91,17 @@
                 android:layout_toRightOf="@id/fileSize"
                 android:textColor="@color/darkGray"
                 android:textSize="@dimen/text_10sp" />
+            <CheckBox
+                android:id="@+id/list_item_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:visibility="gone" />
         </RelativeLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

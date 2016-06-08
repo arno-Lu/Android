@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/person_image_height_in_side_drawer">
+    <ImageView
+        android:id="@+id/id_person_name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/person_image_height_in_side_drawer"
+        android:background="@color/toolBar" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="left"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:id="@+id/user_name"/>
+   </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/set_name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="请输入用户名"
+            android:textSize="@dimen/text_20sp"
+            />
+        <Button
+            android:id="@+id/name_sure"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="确定"/>
+    </LinearLayout>
+
+
+</LinearLayout>
